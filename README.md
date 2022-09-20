@@ -1,6 +1,10 @@
-# my-own-site
+# Welcome here!
 
-## Project setup
+## This is my portfolio site that combines all of my projects.
+## Here is will realise a lot of thing that i like and interested in.
+## I hope you will enjoy it;)
+
+### Project setup
 ```
 npm install
 ```
