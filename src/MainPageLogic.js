@@ -1,7 +1,8 @@
 import NavBar from '@/components/NavBar.vue';
+import CommandConsole from '@/components/CommandConsole.vue'
 
 export default {
-    components:{NavBar},
+    components:{NavBar, CommandConsole},
     data() {
       return{
         aboutMeBlockChanged: false,

@@ -37,6 +37,8 @@ h1{
     width: 100vw;
     background-color: #3E3D3D;
     padding-top: 11px;
+    transition: opacity 1s;
+    opacity: 0;
 }
 .navbar-links { 
     display: flex;
@@ -76,7 +78,10 @@ h1{
     position: absolute;
     top: 10px;
 }
-
+.content-wrapper{
+    transition: opacity 1s;
+    opacity: 0;
+}
 
 /* Welcome Avatar*/
 .welcome-block{
