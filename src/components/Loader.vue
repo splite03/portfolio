@@ -22,11 +22,11 @@ export default {
     mounted(){
       setTimeout(() => {
         this.$store.state.loaded = true
-      }, 6500)
+      }, 7000)
       setTimeout(() => {
         document.querySelector('.navbar').style.opacity = 1
         document.querySelector('.content-wrapper').style.opacity = 1
-      }, 6501)
+      }, 7010)
     }
 }
 </script>
@@ -36,6 +36,8 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    width: 100vw;
 }
 .container{
     margin: 25vh 0;
@@ -82,6 +84,7 @@ export default {
 }
 .loader-rotate-wrapper.section-left .loader-rotate{
     /* background-color: rgb(0, 195, 255); */
+    left: 14px;
     border-bottom-color: rgb(255, 0, 0);
     border-left-color: rgb(255, 0, 0);
     transform: rotate(225deg);
@@ -89,6 +92,7 @@ export default {
     animation: spin-left 1.4s 3.3s, color-bot-left 5s 1s forwards;
 }
 .loader-box{
+    opacity: 0;
     height: 14px;
     width: 14px;
     background-color: red;
@@ -96,9 +100,19 @@ export default {
     display: inline;
     bottom: 193px;
     left: calc(50% - 7px);
-    transition: transform;
-    animation: translate 1.5s 1s 1 forwards, scaleX 2.2s 2.5s forwards, color 5s 1s forwards, box-back 1.5s 4.7s forwards;
+    animation:opac 6.5s .5s forwards, translate 1.5s 1s 1 forwards, scaleX 2.2s 2.5s forwards, coloring 5s 1s forwards, box-back 1.5s 4.7s forwards;
     /* transform: scaleX(1) translateY(1); */
+}
+@keyframes opac {
+    10%{
+        opacity: 1;
+    }
+    90%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
 }
 @keyframes box-back{
     0%{
@@ -175,7 +189,7 @@ export default {
         border-left-color: rgb(116, 255, 47);
     }
 }
-@keyframes color{
+@keyframes coloring{
     to{
         background-color: rgb(116, 255, 47);
     }
