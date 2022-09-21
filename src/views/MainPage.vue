@@ -1,5 +1,5 @@
 <template >
-    <nav-bar></nav-bar>
+    <nav-bar :scrollToAbout="scrollToAbout"></nav-bar>
 
     <!-- БЛОК ПЕРВИЧНЫЙ -->
 
