@@ -28,7 +28,7 @@ export default {
                 ['name : notes3','technologys : html, css, vue, js','','Первый проект, который я сделал через неделю после начала изучения Front-end разработки. Последний рефактор был сделан на Vue js.'],
                 ['name : notes4','technologys : html, css, vue, js','','Первый проект, который я сделал через неделю после начала изучения Front-end разработки. Последний рефактор был сделан на Vue js.'],
             ],
-            helpText:['project.change - посмотреть проекты/следующий проект','project.current - перейти к текущему проекту','project.<name> - перейти к проекту по имени','clear - очистить консоль', 'bgc:<color> - смени цвет фона', 'fc:<color> - смена цвета шрифта'],
+            helpText:['project.next - посмотреть проекты/следующий проект','project.current - перейти к текущему проекту','project.<name> - перейти к проекту по имени','clear - очистить консоль', 'bgc:<color> - смени цвет фона', 'fc:<color> - смена цвета шрифта'],
             projectCounter: -1,
             inputValue:'',
             allInputs:[],
@@ -74,7 +74,7 @@ export default {
                 this.backColorChanger()
             }
             // ПРОКРУТКА ПРОЕКТОВ
-            else if(value === 'project.change') {
+            else if(value === 'project.next') {
                 const projectLength = this.projectsTextes.length - 1
                 
                 this.projectCounter === projectLength ? this.projectCounter = 0 : ++this.projectCounter
