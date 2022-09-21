@@ -6,7 +6,13 @@
             <div class="console-text-area">
                 <p class="console-text" v-for="(text, idx) in textes" :key="text">{{textes[idx]}}</p>
             </div>
-            <input class="console-input" @keydown.enter="submitInput()" v-model="inputValue" @keydown.down="allInputsHandlerDown()" @keydown.up="allInputsHandlerUp()">
+            <input class="console-input" 
+            @keydown.enter="submitInput()" 
+            @keydown.down="allInputsHandlerDown()" 
+            @keydown.up="allInputsHandlerUp()" 
+            v-model="inputValue" 
+            @keydown.esc="inputValue = ''"
+            >
         </div>
     </div>
 </template>
@@ -15,51 +21,95 @@
 export default {
     data() {
         return{
-            textes:['use project.current  to go current project','use project.change  to see next project values','use project.name','use project.change.name','','Start taping some commands..'],
-            projectsTextes:{
-                0:['name : notes','technologys : html, css, vue, js','','Первый проект, который я сделал через неделю после начала изучения Front-end разработки. Последний рефактор был сделан на Vue js.'],
-                1:['name : tasks','technologys : html, css, vue, js','',''],
-                2:['name : notes3','technologys : html, css, vue, js','','Первый проект, который я сделал через неделю после начала изучения Front-end разработки. Последний рефактор был сделан на Vue js.'],
-                3:['name : notes4','technologys : html, css, vue, js','','Первый проект, который я сделал через неделю после начала изучения Front-end разработки. Последний рефактор был сделан на Vue js.'],
-            },
-            projectCounter: 0,
+            textes:['type <help> to see commands..'],
+            projectsTextes:[
+                ['name : notes','technologys : html, css, vue, js','','Первый проект, который я сделал через неделю после начала изучения Front-end разработки. Последний рефактор был сделан на Vue js.'],
+                ['name : tasks','technologys : html, css, vue, js','','Проект по формированию задач и отслеживанием их выполнения.'],
+                ['name : notes3','technologys : html, css, vue, js','','Первый проект, который я сделал через неделю после начала изучения Front-end разработки. Последний рефактор был сделан на Vue js.'],
+                ['name : notes4','technologys : html, css, vue, js','','Первый проект, который я сделал через неделю после начала изучения Front-end разработки. Последний рефактор был сделан на Vue js.'],
+            ],
+            helpText:['project.change - посмотреть проекты/следующий проект','project.current - перейти к текущему проекту','project.<name> - перейти к проекту по имени','clear - очистить консоль', 'bgc:<color> - смени цвет фона', 'fc:<color> - смена цвета шрифта'],
+            projectCounter: -1,
             inputValue:'',
             allInputs:[],
             counterInputHandler:0
         }
     },
     methods:{
+        // ПОИСК ИМЕНИ ПРОЕКТА В МАССИВЕ С МАССИВАМИ
+
+        searchName(re, arrays){
+            for (let i = 0; i < arrays.length; i++){
+                if(arrays[i][0].split(':')[1].trim().search(re) != -1){return i}
+            }
+            return -1
+        },
+
+        // МЕНЯЕМ ЦВЕТ ФОНА ШРИФТА ПРИ ОБНОВЛЕНИИ ТЕКСТА
+
+        backColorChanger(){
+            const background = document.documentElement.style
+            background.setProperty('--back-color','grey')
+            setTimeout(() => {
+                background.setProperty('--back-color','none')
+            }, 10)
+        },
+
+        // ОБРАБОТЧИК ИНПУТА - ENTER
+
         submitInput() {
-            let value = this.inputValue
+            let value = this.inputValue.toLowerCase()
             this.allInputs.push(value)
+            this.inputValue = ''
+            this.counterInputHandler = 0
+            // ПЕРЕЙТИ К ПРОЕКТУ
             if(value === 'project.current'){
                 document.getElementById('link').click()
                 console.log('curent');
-                this.inputValue = ''
-            }else if(value === 'project.change') {
-                this.textes = this.projectsTextes[this.projectCounter]
-                this.inputValue = 'project.current'
-                this.projectCounter++
-                if (this.projectCounter > Object.keys(this.projectsTextes).length - 1 ){
-                    this.projectCounter = 0
-                }
-            }else if(value === 'project.change.name') {
-                console.log('change value by name');
-                this.inputValue = ''
-            }else if(value === 'project.name') {
-                console.log('go by name');
-                this.inputValue = ''
-            }else if(value === 'clear') {
+            }
+            // КОНСОЛЬНЫЕ КОМАНДЫ
+            else if(value === 'help'){
+                this.textes = Array.from(this.helpText)
+                this.projectCounter = -1
+                this.backColorChanger()
+            }
+            // ПРОКРУТКА ПРОЕКТОВ
+            else if(value === 'project.change') {
+                const projectLength = this.projectsTextes.length - 1
+                
+                this.projectCounter === projectLength ? this.projectCounter = 0 : ++this.projectCounter
+                this.textes = Array.from(this.projectsTextes[this.projectCounter])
+                this.backColorChanger()
+            }
+            // ПЕРЕХОД ПО ИМЕНИ 
+            else if(value.split('.')[0] === 'project') {
+                let re = new RegExp(value.split('.')[1], 'g')
+                let idx = this.searchName(re, this.projectsTextes)
+                idx === -1 ? this.textes.push('Name not found') : this.textes = Array.from(this.projectsTextes[idx]), this.projectCounter = idx
+                this.backColorChanger()
+            }
+            // ОЧИСТИТЬ КОНСОЛЬ
+            else if(value === 'clear') {
                 this.textes.length = 0
-                this.inputValue = ''
-            }else if(value.split(':')[0] === 'bgc') {
-                document.querySelector('body').style.background = value.split(':')[1].trim()
-                this.inputValue = ''
-            }else{
+                this.projectCounter = -1
+            }
+            // ПРИКОЛЮШКИ
+            else if(value.split(':')[0].trim() === 'bgc') {
+                document.querySelector('.console-body').style.background = value.split(':')[1].trim()
+                document.querySelector('.console-app').style.borderColor = value.split(':')[1].trim()
+            }
+            else if(value.split(':')[0].trim() === 'fc') {
+                const fonts = document.documentElement.style
+                fonts.setProperty('--fonts-color',value.split(':')[1].trim())
+            }
+            else{
                 this.textes.push('Wrong syntax. Try again.')
-                this.inputValue = ''
+                this.backColorChanger()
             }
         },
+
+        // СТРЕЛКИ ВВЕРХ-ВНИЗ 
+
         allInputsHandlerUp(){
             if(this.counterInputHandler === 0){
                 this.counterInputHandler = this.allInputs.length
@@ -85,8 +135,8 @@ export default {
 
 <style>
 .console-app { 
-    height: 40vh;
-    width: 45vw;
+    height: 400px;
+    width: 800px;
     background: black;
     display: flex;
     flex-direction: column;
@@ -110,15 +160,23 @@ export default {
     overflow-y: scroll;
     scrollbar-width: 2px;
 }
+:root{
+    --fonts-color: white;
+    --back-color: none;
+}
 .console-text { 
-    color: white;
-    padding: 4px 0;
+    color: var(--fonts-color);
+    padding: 4px;
+    font-size: 20px;
+    transition: all .5s ease-in-out;
+    background: var(--back-color);
 }
 .console-input { 
-    height: 20px;
+    height: 28px;
     background-color: white;
     border: none;
-    font-size: 1rem;
+    font-size: 20px;
+    padding: 4px;
 }
 .console-input:focus-visible{
     outline: 0;

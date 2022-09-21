@@ -57,9 +57,6 @@ h1{
 .navbar-right { 
     display: flex;
 }
-.navbar-right a { 
-    
-}
 .navbar-link-with-underline{
     display: flex;
     flex-direction: column;
@@ -128,7 +125,7 @@ h1{
     display: inline-block;
 }
 .hiden{
-    background-color: rgb(255, 255, 255);
+    opacity: 0;
     display: inline-block;
 }
 
@@ -171,7 +168,6 @@ h1{
 .text-about { 
     margin-bottom: 45px;
 }
-.stick { }
 .back{
     background-color: #0052d6;
     color: white;
@@ -181,6 +177,16 @@ h1{
 }
 .mrgn-left{
     margin-left: 20px;
+}
+
+/* Проекты */
+
+.my-projects{
+    margin-bottom: 200px;
+}
+
+.my-projects-header{
+    margin-bottom: 200px;
 }
 
 /* Анимации */
