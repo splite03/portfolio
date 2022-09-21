@@ -136,7 +136,7 @@ export default {
 <style>
 .console-app { 
     height: 400px;
-    width: 800px;
+    width: 100%;
     background: black;
     display: flex;
     flex-direction: column;
@@ -167,8 +167,8 @@ export default {
 .console-text { 
     color: var(--fonts-color);
     padding: 4px;
-    font-size: 20px;
-    transition: all .5s ease-in-out;
+    font-size: 24px;
+    transition: background .5s ease-in-out;
     background: var(--back-color);
 }
 .console-input { 
