@@ -17,6 +17,9 @@
     .navbar-links a{
         font-size: 16px;
     }
+    .navbar-drop-hider{
+        top:41px;
+    }
     .block-for-avatar{
         height: 340px;
         width: 340px;
@@ -47,6 +50,9 @@
     }
     .navbar-links a{
         font-size: 16px;
+    }
+    .navbar-drop-hider{
+        top:41px;
     }
     .welcome-block{
         margin-top: 80px;
@@ -84,6 +90,9 @@
     }
     .navbar-links a{
         font-size: 16px;
+    }
+    .navbar-drop-hider{
+        top:41px;
     }
     .welcome-block{
         margin-top: 80px;

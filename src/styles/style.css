@@ -48,7 +48,11 @@ h1{
 .navbar-links a{
     font-size: 20px;
     padding: 5px;
-    transition: color .5s;
+    transition: color .5s, background .5s;
+}
+.navbar-main{
+    display: flex;
+    align-items: center;
 }
 .navbar-right { 
     display: flex;
@@ -61,11 +65,8 @@ h1{
     margin-left: 52px;
     position: relative;
 }
-.navbar-link-with-underline:hover .navbar-underline{ 
+.navbar-link:hover .navbar-underline{ 
     animation: underline 1.2s forwards ;
-}
-.navbar-link-with-underline:hover .navbar-link-with-underline:hover a{
-    color: rgb(180, 180, 180);
 }
 .navbar-underline{
     height: 6px;
@@ -73,10 +74,44 @@ h1{
     background-color: rgb(255, 255, 255);
     opacity: 0;
     position: absolute;
-    top: 10px;
+    top: 50px;
 }
 .active{
     color: rgb(176, 176, 176);
+}
+.navbar-drop{
+    display: flex;
+    width: 150px;
+    position: absolute;
+    top: -150px;
+    background: rgb(92, 92, 92);
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-around;
+    z-index: 0;
+    transition: top .6s ease-in-out, opacity 1s;;
+}
+.navbar-drop a{
+    text-align: center;
+    padding: 10px 5px;
+    font-size: 20px;
+}
+.navbar-drop a:hover{
+    background: rgb(71, 71, 71);
+    color: rgb(142, 142, 142);
+}
+.navbar-drop-hider{
+    display: flex;
+    height: 150px;
+    width: 120%;
+    overflow: hidden;
+    position: absolute;
+    top:46px;
+    align-content: center;
+    justify-content: center;
+}
+.drop{
+    top: 0;
 }
 .content-wrapper{
     transition: opacity 1s;
