@@ -10,7 +10,9 @@
     }
     .navbar{
         height: 54px;
-        padding-top: 14px;
+    }
+    .navbar-links{
+        height: 54px;
     }
     .navbar-links a{
         font-size: 16px;
@@ -39,7 +41,9 @@
     }
     .navbar{
         height: 54px;
-        padding-top: 14px;
+    }
+    .navbar-links{
+        height: 54px;
     }
     .navbar-links a{
         font-size: 16px;
@@ -74,7 +78,9 @@
     }
     .navbar{
         height: 54px;
-        padding-top: 14px;
+    }
+    .navbar-links{
+        height: 54px;
     }
     .navbar-links a{
         font-size: 16px;

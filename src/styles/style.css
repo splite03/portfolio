@@ -47,14 +47,12 @@ h1{
 }
 .navbar-links a{
     font-size: 20px;
-    /* transition: border .3s;
-    border-bottom: 4px solid rgba(255, 255, 255, 0); */
+    padding: 5px;
+    transition: color .5s;
 }
-/* .navbar-links a:hover{
-    border-bottom: 4px solid white;
-} */
 .navbar-right { 
     display: flex;
+    align-items: center;
 }
 .navbar-link-with-underline{
     display: flex;
@@ -78,9 +76,7 @@ h1{
     top: 10px;
 }
 .active{
-    color: white;
-    padding: 5px;
-    border-radius: 15px;
+    color: rgb(176, 176, 176);
 }
 .content-wrapper{
     transition: opacity 1s;
@@ -216,12 +212,12 @@ h1{
 }
 @keyframes underline {
     0%{
-        top: 40px;
+        top: 50px;
         transform: scale(.05, 5);
     }
     25%{
         opacity: .5;
-        top: 24px;
+        top: 30px;
         transform: scale(.05, 0.5);
     }
     50%{
@@ -230,7 +226,7 @@ h1{
     }
     100%{
         opacity: 1;
-        top: 24px;
+        top: 30px;
         transform: rotate(180deg) scale(1, .5);
     }
 }
