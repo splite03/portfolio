@@ -177,6 +177,7 @@ export default {
     border: none;
     font-size: 20px;
     padding: 4px;
+    color: black;
 }
 .console-input:focus-visible{
     outline: 0;
