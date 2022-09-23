@@ -182,8 +182,8 @@ h1{
     font-size: 20px;
 }
 .navbar-drop a:hover{
-    background: rgb(71, 71, 71);
-    color: rgb(142, 142, 142);
+    background: var(--background-navbar-theme);
+    color: var(--color-theme);
 }
 .navbar-drop-hider{
     display: flex;
@@ -305,7 +305,7 @@ h1{
 /* Проекты */
 
 .my-projects{
-    margin-bottom: 200px;
+    padding-bottom: 300px;
 }
 
 .my-projects-header{

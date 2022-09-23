@@ -51,6 +51,17 @@
 <script>
 export default {
     props:['scrollToAbout'],
+    mounted(){
+        const body = document.querySelector('.content-wrapper')
+        const linksForDrop = document.querySelector('.navbar-drop')
+        const link = document.querySelectorAll('.navbar-link-with-underline a')[1]
+
+        body.addEventListener('click', () => {
+            linksForDrop.classList.remove('drop')
+            link.classList.remove('active')
+            this.slideBack()
+        })
+    },
     methods:{
         scrollToBlock(i) {
             const p = document.querySelector(i).offsetTop - 400
@@ -126,7 +137,7 @@ export default {
         }else if (theme === 'yellow') {
           background.setProperty('--background-theme','#fff300')
           background.setProperty('--background-navbar-theme','#212121')
-          background.setProperty('--background-navbar-drop-theme','#767676')
+          background.setProperty('--background-navbar-drop-theme','#5f5b00')
           background.setProperty('--color-theme','black')
           background.setProperty('--color-navbar-theme','#fff300')
           document.querySelector('.console-app').style.borderColor = '#212121'
@@ -146,38 +157,5 @@ export default {
 }
 </script>
 <style>
-    .navbar-drop{
-        display: flex;
-        width: 150px;
-        position: absolute;
-        top: -100px;
-        background: rgb(92, 92, 92);
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: space-around;
-        z-index: 0;
-        transition: top .6s ease-in-out, opacity 1s;;
-    }
-    .navbar-drop a{
-        text-align: center;
-        padding: 20px 20px;
-        font-size: 20px;
-    }
-    .navbar-drop a:hover{
-        background: rgb(71, 71, 71);
-        color: rgb(142, 142, 142);
-    }
-    .navbar-drop-hider{
-        display: flex;
-        height: 150px;
-        width: 120%;
-        overflow: hidden;
-        position: absolute;
-        top:46px;
-        align-content: center;
-        justify-content: center;
-    }
-    .drop{
-        top: 0;
-    }
+
 </style>

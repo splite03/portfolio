@@ -136,11 +136,10 @@ export default {
 <style>
 .console-app { 
     height: 400px;
-    width: 100%;
+    width: 800px;
     background: black;
     display: flex;
     flex-direction: column;
-    margin: 20px auto;
     border: 3px solid black;
 }
 .console-header { 

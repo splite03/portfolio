@@ -22,11 +22,11 @@ export default {
     mounted(){
       setTimeout(() => {
         this.$store.state.loaded = true
-      }, 7000)
+      }, 1)
       setTimeout(() => {
         document.querySelector('.navbar').style.opacity = 1
         document.querySelector('.content-wrapper').style.opacity = 1
-      }, 7010)
+      }, 1)
     }
 }
 </script>
