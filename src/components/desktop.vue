@@ -67,14 +67,14 @@ export default {
     margin: 20px;
 }
 .desktop-icon-computer{
-    background-image: url(@/assets/comp.jpg);
+    background-image: url(@/assets/comp.png);
     background-repeat: no-repeat;
     background-size: contain;
     height: 60px;
     width: 60px;
 }
 .desktop-icon-cmd { 
-    background-image: url(@/assets/cmd.jpg);
+    background-image: url(@/assets/cmd.png);
     background-repeat: no-repeat;
     background-size: contain;
     height: 60px;
