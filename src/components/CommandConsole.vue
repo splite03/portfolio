@@ -2,7 +2,10 @@
 <template>
     <a id="link" target="_blank" href="https://www.google.com/"></a>
     <div class="console-app">
-        <div class="console-header"></div>
+        <div class="console-header" 
+        @mousedown.left.prevent="grabHeader()"
+        
+        ></div>
         <div class="console-body">
             <div class="console-text-area">
                 <p class="console-text" v-for="(text, idx) in textes" :key="text">{{textes[idx]}}</p>
@@ -33,10 +36,17 @@ export default {
             projectCounter: -1,
             inputValue:'',
             allInputs:[],
-            counterInputHandler:0
+            counterInputHandler:0,
         }
     },
     methods:{
+        grabHeader(){
+            this.$store.state.grabed = true
+        },
+        dropHeader(){
+            this.$store.state.grabed = false
+        },
+
         // ПОИСК ИМЕНИ ПРОЕКТА В МАССИВЕ С МАССИВАМИ
 
         searchName(re, arrays){
@@ -129,12 +139,19 @@ export default {
             }
 
         }
+    },
+    mounted() {
+        window.addEventListener('mouseup', () => this.dropHeader())
     }
     
 }
 </script>
 
 <style>
+:root{
+    --left-pos: 200px;
+    --top-pos: 200px;
+}
 .console-app { 
     height: 300px;
     width: 500px;
@@ -145,8 +162,8 @@ export default {
     border-bottom: 2px solid black;
     border-right: 2px solid black;
     position: absolute;
-    top: 200px;
-    left: 200px;
+    top: var(--top-pos);
+    left: var(--left-pos);
     z-index: 10;
 }
 .console-header { 

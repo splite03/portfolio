@@ -4,6 +4,7 @@ export default createStore({
   state: {
     loaded: false,
     opacity: 0,
+    grabed: false
   },
   getters: {
     loaded(state) {

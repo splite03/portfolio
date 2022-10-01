@@ -1,5 +1,5 @@
 <template>
-    <div class="desktop">
+    <div class="desktop" @mousemove="moveHeaderX($event), moveHeaderY($event)">
         <div class="desktop-icons">
             <div class="desktop-icon desktop-icon-computer"></div> 
             <div class="desktop-icon desktop-icon-cmd"></div>
@@ -21,7 +21,9 @@ export default {
     components:{CommandConsole},
     data() {
         return{
-            time: ''
+            time: '',
+            startPointX: 200,
+            startPointY: 200,
         }
     },
     methods:{
@@ -30,6 +32,18 @@ export default {
                 const date = new Date()
                 this.time = date.getMinutes() < 10 ? date.getHours() + ":0" + date.getMinutes(): date.getHours() + ":" + date.getMinutes()
             }, 1000)
+        },
+        moveHeaderX(e){
+            const pos = document.documentElement.style
+
+            if (!this.$store.state.grabed) return
+            pos.setProperty('--left-pos', `${this.startPointX+=e.movementX}px`)
+        },
+        moveHeaderY(e){
+            const pos = document.documentElement.style
+
+            if (!this.$store.state.grabed) return
+            pos.setProperty('--top-pos', `${this.startPointY+=e.movementY}px`)
         }
     },
     mounted() {
@@ -45,6 +59,7 @@ export default {
     background-color: #00c0c0;
     position: relative;
     padding-top: 1px ;
+    overflow: hidden ;
 }
 .desktop-icon{
     margin: 20px;
