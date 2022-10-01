@@ -1,20 +1,22 @@
 
 <template>
     <a id="link" target="_blank" href="https://www.google.com/"></a>
-    <div class="console-app">
+    <div class="console">
         <div class="console-header" 
         @mousedown.left.prevent="
-        $store.state.window = 'console',
+        $store.commit('currentWindow','console'),
         $store.commit('grabHeader')">
-            <div class="header-btn hide"
-                @mouseup="$store.commit('afterClick', '.hide')"
-                @mousedown="$store.commit('preClick', '.hide')"></div>
-            <div class="header-btn fullscreen"
-                @mouseup="$store.commit('afterClick', '.fullscreen')"
-                @mousedown="$store.commit('preClick', '.fullscreen')"></div>
-            <div class="header-btn close" 
-                @mouseup="$store.commit('afterClick', '.close'), $store.state.cmdOpened = false"
-                @mousedown="$store.commit('preClick', '.close')"></div>
+            <div class="header-buttons">
+                <div class="header-btn hide-console"
+                    @mouseup="$store.commit('afterClick', '.hide-console')"
+                    @mousedown="$store.commit('preClick', '.hide-console')"></div>
+                <div class="header-btn fullscreen-console"
+                    @mouseup="$store.commit('afterClick', '.fullscreen-console')"
+                    @mousedown="$store.commit('preClick', '.fullscreen-console')"></div>
+                <div class="header-btn close-console" 
+                    @mouseup="$store.commit('afterClick', '.close-console'), $store.state.cmdOpened = false"
+                    @mousedown="$store.commit('preClick', '.close-console')"></div>
+            </div>
         </div>
         <div class="console-body">
             <div class="console-text-area">
@@ -111,7 +113,7 @@ export default {
             // ПРИКОЛЮШКИ
             else if(value.split(':')[0].trim() === 'bgc') {
                 document.querySelector('.console-body').style.background = value.split(':')[1].trim()
-                document.querySelector('.console-app').style.borderColor = value.split(':')[1].trim()
+                document.querySelector('.console').style.borderColor = value.split(':')[1].trim()
             }
             else if(value.split(':')[0].trim() === 'fc') {
                 const fonts = document.documentElement.style
@@ -151,7 +153,7 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@100&display=swap');
 
-.console-app { 
+.console { 
     height: 300px;
     width: 500px;
     background: black;
@@ -163,7 +165,7 @@ export default {
     position: absolute;
     left: var(--left-pos-console);
     top: var(--top-pos-console);
-    z-index: 10;
+    z-index: 12;
 }
 .console-header { 
     background-color: grey;
@@ -175,20 +177,11 @@ export default {
     height: 15px;
     width: 16px;
     background-color: rgb(203, 203, 203);
-    position: absolute;
-    top: 3px;
+    position: static;
+    margin: 3px 2px 0;
     border: 2px solid rgb(72, 72, 72);
     border-top-color: rgb(230, 230, 230);
     border-left-color: rgb(230, 230, 230);
-}
-.hide { 
-    right: 44px;
-}
-.fullscreen { 
-    right: 24px;
-}
-.close { 
-    right: 4px;
 }
 .console-body { 
     height: 95%;

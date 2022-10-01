@@ -1,19 +1,30 @@
 <template>
     <div class="browser" >
-        <div class="browser-header" @mousedown.prevent="$store.state.window = 'browser', $store.commit(`grabHeader`)">
-            <div class="browser-header-buttons">
-                <div class="header-btn"></div>
-                <div class="header-btn"></div>
-                <div class="header-btn"></div>
+        <div class="browser-header" @mousedown.prevent="$store.commit(`currentWindow`, 'browser'), $store.state.window = 'browser'">
+            <div class="header-buttons">
+                <div class="header-btn hide-browser" style="position:static"
+                    @mouseup="$store.commit('afterClick', '.hide-browser')"
+                    @mousedown="$store.commit('preClick', '.hide-browser')"></div>
+                <div class="header-btn fullscreen-browser" style="position:static"
+                    @mouseup="$store.commit('afterClick', '.fullscreen-browser')"
+                    @mousedown="$store.commit('preClick', '.fullscreen-browser')"></div>
+                <div class="header-btn close-browser" style="position:static"
+                    @mouseup="$store.commit('afterClick', '.close-browser'), $store.state.browserOpened = false"
+                    @mousedown="$store.commit('preClick', '.close-browser')"></div>
             </div>
         </div>
         <div class="browser-body">
             <div class="browser-input-window">
-                <div class="header-btn home"></div>
-                <div class="header-btn reload"></div>
-                <input class="browser-input" type="text" name="" id="" v-model="inputLinks" @keypress.enter="submitLink()">
+                <div class="header-btn home"
+                    @mouseup="$store.commit('afterClick', '.home'), homePage()"
+                    @mousedown="$store.commit('preClick', '.home')"></div>
+                <div class="header-btn reload"
+                    @mouseup="$store.commit('afterClick', '.reload'), reloadPage()"
+                    @mousedown="$store.commit('preClick', '.reload')"></div>
+                <input class="browser-input" type="text" name="" id="" v-model="inputLinks" @keypress.enter="submitLink(), welcomePage = false">
             </div>
-            <iframe :src="link" frameborder="0" class="browser-view"></iframe>
+            <iframe :src="link" frameborder="0" class="browser-view" v-show="!welcomePage"></iframe>
+            <div class="browser-view welcomePage" v-show="welcomePage"></div>
         </div>
     </div>
 </template>
@@ -23,7 +34,8 @@ export default {
         return{
             inputLinks: 'http://',
             // link: 'https://bing.com'
-            link: ''
+            link: '',
+            welcomePage: true
         }
     },
     methods:{
@@ -35,7 +47,8 @@ export default {
             this.link = ''
             setTimeout(() =>{this.link = currentPage},100)
         },homePage(){
-            this.link = 'https://bing.com'
+            this.link = 'http://'
+            this.inputLinks = 'http://'
         }
     }
 }
@@ -50,6 +63,7 @@ export default {
     position: absolute;
     left: var(--left-pos-browser);
     top: var(--top-pos-browser);
+    z-index: 12;
 }
 .browser-header { 
     height: 20px;
@@ -57,15 +71,16 @@ export default {
     background-color: grey;
     border-right: 3px solid rgb(195, 195, 195);
 }
-.browser-btn { 
-    height: 15px;
-    width: 16px;
-    background-color: rgb(203, 203, 203);
-    position: absolute;
-    top: 3px;
-    border: 2px solid rgb(72, 72, 72);
-    border-top-color: rgb(230, 230, 230);
-    border-left-color: rgb(230, 230, 230);
+.header-buttons{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 2px;
+}   
+.home{
+    margin: 0 3px;
+}
+.reload{
+    margin: 0 3px;
 }
 .browser-body { 
     height: 600px;
@@ -80,22 +95,26 @@ export default {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    background-color: rgb(221, 221, 221);
+    background-color: rgb(181, 181, 181);
 }
 .browser-input { 
-    width: 80%;
-    /* position: absolute;
-    top: 0;
-    right: 20px; */
+    width: 95%;
     font-size: 13px;
     padding: 2px 5px;
     border: 1px solid black;
     background-color: rgb(255, 255, 255);
+    margin-left: 5px;
 }
 .browser-input:focus-visible{
     outline: 0;
 }
 .browser-view { 
     height: 100%;
+}
+.welcomePage{
+    background-image:url(@/assets/browser-welcome.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    pointer-events: none;
 }
 </style>

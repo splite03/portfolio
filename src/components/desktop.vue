@@ -7,7 +7,7 @@
                 <div class="desktop-icon desktop-icon-computer"></div>
                 <p class="desktop-icon-title">My Computer</p>
             </div>
-            <div class="desktop-icon-wrapper " @dblclick="$store.state.cmdOpened = true">
+            <div class="desktop-icon-wrapper " @dblclick="$store.state.cmdOpened = true, $store.commit('currentWindow','console')">
                 <div class="desktop-icon desktop-icon-cmd"></div>
                 <p class="desktop-icon-title">Command</p>
             </div>
@@ -15,13 +15,13 @@
                 <div class="desktop-icon desktop-icon-folder"></div>
                 <p class="desktop-icon-title">Projects</p>
             </div>
-            <div class="desktop-icon-wrapper ">
+            <div class="desktop-icon-wrapper " @dblclick="$store.state.browserOpened = true, $store.commit('currentWindow','browser')">
                 <div class="desktop-icon desktop-icon-explorer"></div>
                 <p class="desktop-icon-title">Internet Explorer</p>
             </div>
         </div> 
         <command-console v-if="$store.state.cmdOpened"></command-console>
-        <browser></browser>
+        <browser v-if="$store.state.browserOpened"></browser>
         <div class="desktop-bar">
             <div class="desktop-start"
             @mousedown="$store.commit('preClick', '.desktop-start')"
@@ -144,7 +144,7 @@ export default {
     bottom: 0;
     left: 0;
     border-top: 2px solid rgb(232, 232, 232);
-    z-index: 20;
+    z-index: 15;
 }
 .desktop-stick{
     height: 80%;
@@ -189,5 +189,8 @@ export default {
     text-align: center;
     padding: 7px 4px;
     margin: 1px;
+}
+.active-window{
+    z-index: 14;
 }
 </style>

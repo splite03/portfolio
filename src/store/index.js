@@ -6,6 +6,8 @@ export default createStore({
     opacity: 0,
     grabed: false,
     cmdOpened: false,
+    browserOpened: false,
+    folderOpened: false,
     window: ''
   },
   getters: {
@@ -32,6 +34,14 @@ export default createStore({
     },
     dropHeader(state){
       state.grabed = false
+    },
+    currentWindow(state, add){
+      state.window = add
+      try{
+        document.querySelector('.active-window').classList.remove('active-window')
+      }catch{}
+      document.querySelector(`.${add}`).classList.add('active-window')
+      console.log(document.querySelector(`.${add}`).classList);
     }
   },
   actions: {
