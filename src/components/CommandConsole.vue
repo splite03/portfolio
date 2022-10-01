@@ -3,12 +3,18 @@
     <a id="link" target="_blank" href="https://www.google.com/"></a>
     <div class="console-app">
         <div class="console-header" 
-        @mousedown.left.prevent="grabHeader()">
-            <div class="console-header-btn hide"></div>
-            <div class="console-header-btn fullscreen"></div>
-            <div class="console-header-btn close" 
-            @mouseup="afterClick()"
-            @mousedown="preClick()"></div>
+        @mousedown.left.prevent="
+        $store.state.window = 'console',
+        $store.commit('grabHeader')">
+            <div class="header-btn hide"
+                @mouseup="$store.commit('afterClick', '.hide')"
+                @mousedown="$store.commit('preClick', '.hide')"></div>
+            <div class="header-btn fullscreen"
+                @mouseup="$store.commit('afterClick', '.fullscreen')"
+                @mousedown="$store.commit('preClick', '.fullscreen')"></div>
+            <div class="header-btn close" 
+                @mouseup="$store.commit('afterClick', '.close'), $store.state.cmdOpened = false"
+                @mousedown="$store.commit('preClick', '.close')"></div>
         </div>
         <div class="console-body">
             <div class="console-text-area">
@@ -44,22 +50,6 @@ export default {
         }
     },
     methods:{
-        preClick(){
-            document.querySelector('.close').style.border = '2px solid rgb(225, 225, 225)'
-            document.querySelector('.close').style.borderTop = '2px solid rgb(72, 72, 72)'
-            document.querySelector('.close').style.borderLeft = '2px solid rgb(72, 72, 72)'
-        },
-        afterClick(){
-            document.querySelector('.close').style.border = '2px solid rgb(72, 72, 72)'
-            document.querySelector('.close').style.borderTop = '2px solid rgb(225, 225, 225)'
-            document.querySelector('.close').style.borderLeft = '2px solid rgb(225, 225, 225)'
-        },
-        grabHeader(){
-            this.$store.state.grabed = true
-        },
-        dropHeader(){
-            this.$store.state.grabed = false
-        },
 
         // ПОИСК ИМЕНИ ПРОЕКТА В МАССИВЕ С МАССИВАМИ
 
@@ -153,9 +143,6 @@ export default {
             }
 
         }
-    },
-    mounted() {
-        window.addEventListener('mouseup', () => this.dropHeader())
     }
     
 }
@@ -164,10 +151,6 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@100&display=swap');
 
-:root{
-    --left-pos: 200px;
-    --top-pos: 200px;
-}
 .console-app { 
     height: 300px;
     width: 500px;
@@ -178,31 +161,31 @@ export default {
     border-bottom: 2px solid black;
     border-right: 2px solid black;
     position: absolute;
-    top: var(--top-pos);
-    left: var(--left-pos);
+    left: var(--left-pos-console);
+    top: var(--top-pos-console);
     z-index: 10;
 }
 .console-header { 
     background-color: grey;
-    height: 5%;
+    height: 20px;
     width: 100%;
     position: relative;
 }
-.console-header-btn { 
-    height: 12px;
-    width: 13px;
+.header-btn { 
+    height: 15px;
+    width: 16px;
     background-color: rgb(203, 203, 203);
     position: absolute;
-    top: 1px;
+    top: 3px;
     border: 2px solid rgb(72, 72, 72);
     border-top-color: rgb(230, 230, 230);
     border-left-color: rgb(230, 230, 230);
 }
 .hide { 
-    right: 36px;
+    right: 44px;
 }
 .fullscreen { 
-    right: 20px;
+    right: 24px;
 }
 .close { 
     right: 4px;
