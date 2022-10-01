@@ -3,9 +3,13 @@
     <a id="link" target="_blank" href="https://www.google.com/"></a>
     <div class="console-app">
         <div class="console-header" 
-        @mousedown.left.prevent="grabHeader()"
-        
-        ></div>
+        @mousedown.left.prevent="grabHeader()">
+            <div class="console-header-btn hide"></div>
+            <div class="console-header-btn fullscreen"></div>
+            <div class="console-header-btn close" 
+            @mouseup="afterClick()"
+            @mousedown="preClick()"></div>
+        </div>
         <div class="console-body">
             <div class="console-text-area">
                 <p class="console-text" v-for="(text, idx) in textes" :key="text">{{textes[idx]}}</p>
@@ -40,6 +44,16 @@ export default {
         }
     },
     methods:{
+        preClick(){
+            document.querySelector('.close').style.border = '2px solid rgb(225, 225, 225)'
+            document.querySelector('.close').style.borderTop = '2px solid rgb(72, 72, 72)'
+            document.querySelector('.close').style.borderLeft = '2px solid rgb(72, 72, 72)'
+        },
+        afterClick(){
+            document.querySelector('.close').style.border = '2px solid rgb(72, 72, 72)'
+            document.querySelector('.close').style.borderTop = '2px solid rgb(225, 225, 225)'
+            document.querySelector('.close').style.borderLeft = '2px solid rgb(225, 225, 225)'
+        },
         grabHeader(){
             this.$store.state.grabed = true
         },
@@ -148,6 +162,8 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@100&display=swap');
+
 :root{
     --left-pos: 200px;
     --top-pos: 200px;
@@ -170,6 +186,26 @@ export default {
     background-color: grey;
     height: 5%;
     width: 100%;
+    position: relative;
+}
+.console-header-btn { 
+    height: 12px;
+    width: 13px;
+    background-color: rgb(203, 203, 203);
+    position: absolute;
+    top: 1px;
+    border: 2px solid rgb(72, 72, 72);
+    border-top-color: rgb(230, 230, 230);
+    border-left-color: rgb(230, 230, 230);
+}
+.hide { 
+    right: 36px;
+}
+.fullscreen { 
+    right: 20px;
+}
+.close { 
+    right: 4px;
 }
 .console-body { 
     height: 95%;
@@ -195,11 +231,13 @@ export default {
     transition: background .5s ease-in-out;
     background: var(--back-color);
     font-size: var(--text-size);
+    font-family: 'Noto Sans Display', sans-serif;
 }
 .console-input { 
     height: 28px;
     background-color: white;
     font-size: var(--text-size);
+    font-family: 'Noto Sans Display', sans-serif;
     padding: 4px;
     color: black;
     border-bottom: 3px solid rgb(159, 159, 159);

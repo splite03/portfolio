@@ -1,10 +1,12 @@
 <template>
-    <div class="desktop" @mousemove="moveHeaderX($event), moveHeaderY($event)">
+    <div class="desktop"
+    @mousemove="moveHeaderX($event), moveHeaderY($event)">
         <div class="desktop-icons">
             <div class="desktop-icon desktop-icon-computer"></div> 
-            <div class="desktop-icon desktop-icon-cmd"></div>
+            <div class="desktop-icon desktop-icon-cmd" 
+            @dblclick.prevent="$store.state.cmdOpened = true"></div>
         </div> 
-        <command-console></command-console>
+        <command-console v-if="$store.state.cmdOpened"></command-console>
         <div class="desktop-bar">
             <div class="desktop-start"></div>
             <div class="desktop-stick one"></div>
@@ -86,6 +88,7 @@ export default {
     bottom: 0;
     left: 0;
     border-top: 2px solid rgb(232, 232, 232);
+    z-index: 20;
 }
 .desktop-stick{
     height: 80%;
