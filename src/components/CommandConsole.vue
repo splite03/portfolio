@@ -1,3 +1,4 @@
+
 <template>
     <a id="link" target="_blank" href="https://www.google.com/"></a>
     <div class="console-app">
@@ -135,12 +136,18 @@ export default {
 
 <style>
 .console-app { 
-    height: 400px;
-    width: 800px;
+    height: 300px;
+    width: 500px;
     background: black;
     display: flex;
     flex-direction: column;
-    border: 3px solid black;
+    border: 3px solid rgb(194, 194, 194);
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+    position: absolute;
+    top: 200px;
+    left: 200px;
+    z-index: 10;
 }
 .console-header { 
     background-color: grey;
@@ -152,6 +159,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border-right: 3px solid rgb(159,159,159);
 }
 .console-text-area { 
     height: 100%;
@@ -169,14 +177,16 @@ export default {
     font-size: 24px;
     transition: background .5s ease-in-out;
     background: var(--back-color);
+    font-size: var(--text-size);
 }
 .console-input { 
     height: 28px;
     background-color: white;
-    border: none;
-    font-size: 20px;
+    font-size: var(--text-size);
     padding: 4px;
     color: black;
+    border-bottom: 3px solid rgb(159, 159, 159);
+    border-right: 3px solid rgb(159, 159, 159);
 }
 .console-input:focus-visible{
     outline: 0;

@@ -47,7 +47,7 @@
         <div class="my-projects">
             <div class="container">
                 <h1 class="my-projects-header">Мои проекты</h1>
-                <command-console></command-console>
+                <desktop></desktop>
             </div>
         </div>
     </div>

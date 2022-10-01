@@ -21,6 +21,7 @@
     --theme-img-red:url(/src/assets/theme-red.png);
     --theme-img-yellow:url(/src/assets/theme-yellow.png);
     --theme-img-blue:url(/src/assets/theme-blue.png);
+    --text-size: 16px;
 }
 body{
     height: 100vh;
@@ -215,7 +216,7 @@ h1{
     margin: 0 0 35px 8px; /* media param */
 }
 .avatar{
-    background-image: url(/Users/User/Downloads/avat.png);
+    background-image: url(@/assets/avat.png);
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
@@ -309,7 +310,7 @@ h1{
 }
 
 .my-projects-header{
-    margin-bottom: 200px;
+    margin-bottom: 40px;
 }
 
 /* Анимации */

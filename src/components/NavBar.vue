@@ -115,16 +115,16 @@ export default {
           background.setProperty('--background-navbar-drop-theme','rgb(92, 92, 92)')
           background.setProperty('--color-theme','black')
           background.setProperty('--color-navbar-theme','white')
-          document.querySelector('.console-app').style.borderColor = 'black'
-          document.querySelector('.console-body').style.background = 'black'
+        //   document.querySelector('.console-app').style.borderColor = 'black'
+        //   document.querySelector('.console-body').style.background = 'black'
         }else if (theme === 'dark') {
           background.setProperty('--background-theme','#3c3c3c')
           background.setProperty('--background-navbar-theme','#212121')
           background.setProperty('--background-navbar-drop-theme','#767676')
           background.setProperty('--color-theme','white')
           background.setProperty('--color-navbar-theme','white')
-          document.querySelector('.console-app').style.borderColor = '#212121'
-          document.querySelector('.console-body').style.background = '#212121'
+        //   document.querySelector('.console-app').style.borderColor = '#212121'
+        //   document.querySelector('.console-body').style.background = '#212121'
           setTimeout(() => {document.querySelector('.themes-button').style.backgroundColor = 'white'},300)
         }else if (theme === 'red') {
           background.setProperty('--background-theme','#de2827')
@@ -132,24 +132,24 @@ export default {
           background.setProperty('--background-navbar-drop-theme','#9d0033')
           background.setProperty('--color-theme','#ffed38')
           background.setProperty('--color-navbar-theme','#ffbf01')
-          document.querySelector('.console-app').style.borderColor = '#84002f'
-          document.querySelector('.console-body').style.background = '#84002f'
+        //   document.querySelector('.console-app').style.borderColor = '#84002f'
+        //   document.querySelector('.console-body').style.background = '#84002f'
         }else if (theme === 'yellow') {
           background.setProperty('--background-theme','#fff300')
           background.setProperty('--background-navbar-theme','#212121')
           background.setProperty('--background-navbar-drop-theme','#5f5b00')
           background.setProperty('--color-theme','black')
           background.setProperty('--color-navbar-theme','#fff300')
-          document.querySelector('.console-app').style.borderColor = '#212121'
-          document.querySelector('.console-body').style.background = '#212121'
+        //   document.querySelector('.console-app').style.borderColor = '#212121'
+        //   document.querySelector('.console-body').style.background = '#212121'
         }else if (theme === 'blue') {
           background.setProperty('--background-theme','#29baff')
           background.setProperty('--background-navbar-theme','#00549f')
           background.setProperty('--background-navbar-drop-theme','#407fb7')
           background.setProperty('--color-theme','#e8f1fa')
           background.setProperty('--color-navbar-theme','#e8f1fa')
-          document.querySelector('.console-app').style.borderColor = '#00549f'
-          document.querySelector('.console-body').style.background = '#00549f'
+        //   document.querySelector('.console-app').style.borderColor = '#00549f'
+        //   document.querySelector('.console-body').style.background = '#00549f'
         }
         this.slideBack()
       }
