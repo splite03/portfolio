@@ -1,5 +1,6 @@
 <template>
     <div class="browser" @mousedown="$emit('clickBrowser')">
+        <div class="resize" @mousedown.prevent="$store.state.sizing = true"></div>
         <div class="browser-header" 
         @mousedown.prevent="
         $store.state.window = 'browser',
@@ -12,7 +13,9 @@
                     @mouseup="$store.commit('afterClick', '.fullscreen-browser')"
                     @mousedown="$store.commit('preClick', '.fullscreen-browser')"></div>
                 <div class="header-btn close-browser" style="position:static"
-                    @mouseup="$store.commit('afterClick', '.close-browser'), $store.state.browserOpened = false"
+                    @mouseup="$store.commit('afterClick', '.close-browser'), 
+                    $store.state.browserOpened = false,
+                    $store.state.window = undefined"
                     @mousedown="$store.commit('preClick', '.close-browser')"></div>
             </div>
         </div>
@@ -61,6 +64,9 @@ export default {
 <style>
 .browser { 
     width: 800px;
+    height: 600px;
+    min-width: 400px;
+    min-height: 400px;
     background-color: white;
     border: 3px solid rgb(195, 195, 195);
     border-bottom-color: rgb(77, 77, 77);
@@ -69,6 +75,7 @@ export default {
     left: var(--left-pos-browser);
     top: var(--top-pos-browser);
     z-index: 12;
+    overflow: hidden;
 }
 .browser-header { 
     height: 20px;
@@ -88,7 +95,7 @@ export default {
     margin: 0 3px;
 }
 .browser-body { 
-    height: 600px;
+    height: 100%;
     border-bottom: 3px solid rgb(195, 195, 195);
     border-right: 3px solid rgb(195, 195, 195);
     display: flex;
@@ -118,7 +125,7 @@ export default {
 }
 .welcomePage{
     background-image:url(@/assets/browser-welcome.png);
-    background-size: cover;
+    background-size:cover;
     background-repeat: no-repeat;
     pointer-events: none;
 }

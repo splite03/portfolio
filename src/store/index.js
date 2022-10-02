@@ -5,10 +5,11 @@ export default createStore({
     loaded: false,
     opacity: 0,
     grabed: false,
+    sizing: false,
     cmdOpened: false,
     browserOpened: false,
     folderOpened: false,
-    window: ''
+    window: undefined
   },
   getters: {
     loaded(state) {
@@ -33,6 +34,7 @@ export default createStore({
       state.grabed = true
     },
     dropHeader(state){
+      state.sizing = false
       state.grabed = false
     },
     currentWindow(state, add){

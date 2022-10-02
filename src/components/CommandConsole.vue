@@ -2,6 +2,7 @@
 <template>
     <a id="link" target="_blank" href="https://www.google.com/"></a>
     <div class="console" @mousedown="$emit('clickCmd')">
+        <div class="resize" @mousedown.prevent="$store.state.sizing = true"></div>
         <div class="console-header" 
         @mousedown.left.prevent="$store.commit('grabHeader')">
             <div class="header-buttons">
@@ -12,7 +13,9 @@
                     @mouseup="$store.commit('afterClick', '.fullscreen-console')"
                     @mousedown="$store.commit('preClick', '.fullscreen-console')"></div>
                 <div class="header-btn close-console" 
-                    @mouseup="$store.commit('afterClick', '.close-console'), $store.state.cmdOpened = false"
+                    @mouseup="$store.commit('afterClick', '.close-console'), 
+                    $store.state.cmdOpened = false,
+                    $store.state.window = undefined"
                     @mousedown="$store.commit('preClick', '.close-console')"></div>
             </div>
         </div>
@@ -152,9 +155,20 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@100&display=swap');
 
+.resize{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+	border-bottom: 15px solid #c2c2c2; 
+	border-left: 15px solid transparent;
+    z-index: 17;
+    cursor: nwse-resize;
+}
 .console { 
     height: 300px;
     width: 500px;
+    min-width: 400px;
+    min-height: 200px;
     background: black;
     display: flex;
     flex-direction: column;
@@ -168,30 +182,34 @@ export default {
 }
 .console-header { 
     background: linear-gradient(to right, grey, lightgrey);
-    height: 20px;
+    height: 18px;
     width: 100%;
     position: relative;
+    border-right: 3px solid #c2c2c2;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 .header-btn { 
     height: 15px;
     width: 16px;
     background-color: rgb(203, 203, 203);
     position: static;
-    margin: 3px 2px 0;
+    margin: 0 2px 0;
     border: 2px solid rgb(72, 72, 72);
     border-top-color: rgb(230, 230, 230);
     border-left-color: rgb(230, 230, 230);
 }
 .console-body { 
-    height: 95%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-right: 3px solid rgb(159,159,159);
+    border-right: 3px solid #c2c2c2;
 }
 .console-text-area { 
     height: 100%;
-    margin: 1%;
+    margin: 3px;
     overflow-y: scroll;
     scrollbar-width: 2px;
 }
@@ -215,8 +233,8 @@ export default {
     font-family: 'Noto Sans Display', sans-serif;
     padding: 4px;
     color: black;
-    border-bottom: 3px solid rgb(159, 159, 159);
-    border-right: 3px solid rgb(159, 159, 159);
+    border: 0;
+    border-bottom: 3px solid #c2c2c2;
 }
 .console-input:focus-visible{
     outline: 0;

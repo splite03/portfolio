@@ -30,7 +30,10 @@
         </div> 
         <div class="desktop-empty-space" @mousedown="clickIcon('')"></div>
         <browser v-if="$store.state.browserOpened" @clickBrowser="clickIcon(''), $store.commit('currentWindow','browser')"></browser>
-        <command-console v-if="$store.state.cmdOpened" @clickCmd="clickIcon(''),$store.commit('currentWindow','console')"></command-console>
+        <command-console 
+        v-if="$store.state.cmdOpened"
+        @clickCmd="clickIcon(''),
+        $store.commit('currentWindow','console')"></command-console>
         <div class="desktop-bar">
             <div class="desktop-start"
             @mousedown="$store.commit('preClick', '.desktop-start')"
@@ -80,26 +83,33 @@ export default {
             this.root.style.setProperty(`--back-icon-color-${whichIcon}`, 'rgb(255, 255, 255, .35)')
             this.root.style.setProperty(`--back-icon-hover-color-${whichIcon}`, 'rgb(255, 255, 255, 0.5)')
         },
-        moveHeaderX(e, window){
+        moveHeaderX(e, thisWindow = 'desktop'){
             const pos = document.documentElement.style
-            let leftPos = getComputedStyle(document.documentElement).getPropertyValue(`--left-pos-${window}`)
-            let currentWindow = window.getComputedStyle(document.querySelector(`.${window}`))
-            let currentWindowWidth = currentWindow.style.width
+            let leftPos = getComputedStyle(document.documentElement).getPropertyValue(`--left-pos-${thisWindow}`)
             let startX = parseInt(leftPos.split('px')[0])
+            let currentWindow = document.querySelector(`.${thisWindow}`)
+            let width = parseInt(window.getComputedStyle(currentWindow).width.split('px')[0])
 
-            console.log(currentWindowWidth);
-
-            if (!this.$store.state.grabed) return
-            pos.setProperty(`--left-pos-${window}`, `${startX+=e.movementX}px`)
+            if (this.$store.state.grabed){
+                pos.setProperty(`--left-pos-${thisWindow}`, `${startX+=e.movementX}px`)
+            }
+            if(this.$store.state.sizing){
+                currentWindow.style.width = `${width + e.movementX}px`
+            }
         },
-        moveHeaderY(e, window){
+        moveHeaderY(e, thisWindow = 'desktop'){
             const pos = document.documentElement.style
-            let topPos = getComputedStyle(document.documentElement).getPropertyValue(`--top-pos-${window}`)
+            let topPos = getComputedStyle(document.documentElement).getPropertyValue(`--top-pos-${thisWindow}`)
             let startY = parseInt(topPos.split('px')[0])
+            let currentWindow = document.querySelector(`.${thisWindow}`)
+            let height = parseInt(window.getComputedStyle(currentWindow).height.split('px')[0])
 
-
-            if (!this.$store.state.grabed) return
-            pos.setProperty(`--top-pos-${window}`, `${startY+=e.movementY}px`)
+            if (this.$store.state.grabed){
+                pos.setProperty(`--top-pos-${thisWindow}`, `${startY+=e.movementY}px`)
+            }
+            if(this.$store.state.sizing){
+                currentWindow.style.height = `${height + e.movementY}px`
+            }
         }
     },
     mounted() {
@@ -113,8 +123,8 @@ export default {
 :root{
     /* ПОЗИЦИИ ОКОН */
     --left-pos-browser: 200px;
-    --top-pos-browser: 100px;
-    --left-pos-console: 200px;
+    --top-pos-browser: 50px;
+    --left-pos-console: 150px;
     --top-pos-console: 100px;
     /* ЦВЕТ ФОНА ИКОНОК ПРИ ХОВЕР/КЛИКЕ */
     --back-icon-color-computer: rgba(255, 255, 255, 0);
@@ -139,6 +149,9 @@ export default {
     flex-direction: column;
     align-items: flex-start;
 }
+.desktop-icon-column{
+    z-index: 10;
+}
 .desktop-icon-wrapper{
     display: flex;
     flex-direction: column;
@@ -147,6 +160,7 @@ export default {
     margin-left: 5px;
     padding: 2px;
     margin: 10px 5px;
+    z-index: 10;
 }
 .desktop-icon-title{
     font-size: 11px;
@@ -205,7 +219,8 @@ export default {
     height: 100%;
     width: 100%;
     top: 0;
-    left: 110px;
+    left: 0;
+    z-index: 9;
 }
 .desktop-bar { 
     width: 100%;
