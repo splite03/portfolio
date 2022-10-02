@@ -3,25 +3,34 @@
     @mousemove="moveHeaderX($event, $store.state.window), moveHeaderY($event, $store.state.window)"
     >   
         <div class="desktop-icons">
-            <div class="desktop-icon-wrapper ">
-                <div class="desktop-icon desktop-icon-computer"></div>
-                <p class="desktop-icon-title">My Computer</p>
-            </div>
-            <div class="desktop-icon-wrapper " @dblclick="$store.state.cmdOpened = true, $store.commit('currentWindow','console')">
-                <div class="desktop-icon desktop-icon-cmd"></div>
-                <p class="desktop-icon-title">Command</p>
-            </div>
-            <div class="desktop-icon-wrapper ">
-                <div class="desktop-icon desktop-icon-folder"></div>
-                <p class="desktop-icon-title">Projects</p>
-            </div>
-            <div class="desktop-icon-wrapper " @dblclick="$store.state.browserOpened = true, $store.commit('currentWindow','browser')">
-                <div class="desktop-icon desktop-icon-explorer"></div>
-                <p class="desktop-icon-title">Internet Explorer</p>
+            <div class="desktop-icon-column">
+                <div class="desktop-icon-wrapper computer" 
+                @mousedown="clickIcon('computer')">
+                    <div class="desktop-icon "></div>
+                    <p class="desktop-icon-title">My Computer</p>
+                </div>
+                <div class="desktop-icon-wrapper cmd" 
+                @dblclick="dblClickIco('console','cmd'),this.$store.state.cmdOpened = true" 
+                @mousedown="clickIcon('cmd')">
+                    <div class="desktop-icon "></div>
+                    <p class="desktop-icon-title">Command</p>
+                </div>
+                <div class="desktop-icon-wrapper folder" 
+                @mousedown="clickIcon('folder')">
+                    <div class="desktop-icon "></div>
+                    <p class="desktop-icon-title">Projects</p>
+                </div>
+                <div class="desktop-icon-wrapper explorer" 
+                @mousedown="clickIcon('explorer')" 
+                @dblclick="this.$store.state.browserOpened = true, dblClickIco('browser','explorer')">
+                    <div class="desktop-icon "></div>
+                    <p class="desktop-icon-title">Internet Explorer</p>
+                </div>
             </div>
         </div> 
-        <command-console v-if="$store.state.cmdOpened"></command-console>
-        <browser v-if="$store.state.browserOpened"></browser>
+        <div class="desktop-empty-space" @mousedown="clickIcon('')"></div>
+        <browser v-if="$store.state.browserOpened" @clickBrowser="clickIcon(''), $store.commit('currentWindow','browser')"></browser>
+        <command-console v-if="$store.state.cmdOpened" @clickCmd="clickIcon(''),$store.commit('currentWindow','console')"></command-console>
         <div class="desktop-bar">
             <div class="desktop-start"
             @mousedown="$store.commit('preClick', '.desktop-start')"
@@ -39,13 +48,11 @@
     import browser from '@/components/browser.vue'
 export default {
     components:{CommandConsole,browser},
+    props:['clickCmd', 'clickBrowser'],
     data() {
         return{
             time: '',
-            startPointXbrowser: 200,
-            startPointYbrowser: 100,
-            startPointX: 200,
-            startPointY: 100,
+            root: document.documentElement
         }
     },
     methods:{
@@ -55,10 +62,32 @@ export default {
                 this.time = date.getMinutes() < 10 ? date.getHours() + ":0" + date.getMinutes(): date.getHours() + ":" + date.getMinutes()
             }, 1000)
         },
+        dblClickIco(whichIcon, nameIcon){
+            this.$store.commit('currentWindow',whichIcon)
+            this.root.style.setProperty(`--back-icon-color-${nameIcon}`, 'rgb(255, 255, 255, 0)')
+            this.root.style.setProperty(`--back-icon-hover-color-${nameIcon}`, 'rgb(255, 255, 255, 0.35)')
+        },
+        clickIcon(whichIcon){
+            this.root.style.setProperty(`--back-icon-color-computer`, 'rgb(255, 255, 255, 0)')
+            this.root.style.setProperty(`--back-icon-color-cmd`, 'rgb(255, 255, 255, 0)')
+            this.root.style.setProperty(`--back-icon-color-folder`, 'rgb(255, 255, 255, 0)')
+            this.root.style.setProperty(`--back-icon-color-explorer`, 'rgb(255, 255, 255, 0)')
+            this.root.style.setProperty(`--back-icon-hover-color-computer`, 'rgb(255, 255, 255, 0.35)')
+            this.root.style.setProperty(`--back-icon-hover-color-cmd`, 'rgb(255, 255, 255, 0.35)')
+            this.root.style.setProperty(`--back-icon-hover-color-folder`, 'rgb(255, 255, 255, 0.35)')
+            this.root.style.setProperty(`--back-icon-hover-color-explorer`, 'rgb(255, 255, 255, 0.35)')
+
+            this.root.style.setProperty(`--back-icon-color-${whichIcon}`, 'rgb(255, 255, 255, .35)')
+            this.root.style.setProperty(`--back-icon-hover-color-${whichIcon}`, 'rgb(255, 255, 255, 0.5)')
+        },
         moveHeaderX(e, window){
             const pos = document.documentElement.style
             let leftPos = getComputedStyle(document.documentElement).getPropertyValue(`--left-pos-${window}`)
+            let currentWindow = window.getComputedStyle(document.querySelector(`.${window}`))
+            let currentWindowWidth = currentWindow.style.width
             let startX = parseInt(leftPos.split('px')[0])
+
+            console.log(currentWindowWidth);
 
             if (!this.$store.state.grabed) return
             pos.setProperty(`--left-pos-${window}`, `${startX+=e.movementX}px`)
@@ -67,6 +96,7 @@ export default {
             const pos = document.documentElement.style
             let topPos = getComputedStyle(document.documentElement).getPropertyValue(`--top-pos-${window}`)
             let startY = parseInt(topPos.split('px')[0])
+
 
             if (!this.$store.state.grabed) return
             pos.setProperty(`--top-pos-${window}`, `${startY+=e.movementY}px`)
@@ -81,11 +111,20 @@ export default {
 
 <style>
 :root{
+    /* ПОЗИЦИИ ОКОН */
     --left-pos-browser: 200px;
     --top-pos-browser: 100px;
-    
     --left-pos-console: 200px;
     --top-pos-console: 100px;
+    /* ЦВЕТ ФОНА ИКОНОК ПРИ ХОВЕР/КЛИКЕ */
+    --back-icon-color-computer: rgba(255, 255, 255, 0);
+    --back-icon-hover-color-computer: rgba(255, 255, 255, 0.35);
+    --back-icon-color-cmd: rgba(255, 255, 255, 0);
+    --back-icon-hover-color-cmd: rgba(255, 255, 255, 0.35);
+    --back-icon-color-folder: rgba(255, 255, 255, 0);
+    --back-icon-hover-color-folder: rgba(255, 255, 255, 0.35);
+    --back-icon-color-explorer: rgba(255, 255, 255, 0);
+    --back-icon-hover-color-explorer: rgba(255, 255, 255, 0.35);
 }
 .desktop { 
     height: 800px;
@@ -106,35 +145,67 @@ export default {
     align-items: center;
     justify-content: center;
     margin-left: 5px;
+    padding: 2px;
+    margin: 10px 5px;
 }
 .desktop-icon-title{
     font-size: 11px;
 }
 .desktop-icon{
-    margin: 20px;
-    margin-bottom: 4px;
     height: 60px;
     width: 60px;
+    margin: 20px 0 10px;
 }
-.desktop-icon-computer{
+.computer .desktop-icon{
     background-image: url(@/assets/comp.png);
     background-repeat: no-repeat;
     background-size: contain;
 }
-.desktop-icon-cmd { 
+.cmd .desktop-icon{ 
     background-image: url(@/assets/cmd.png);
     background-repeat: no-repeat;
     background-size: contain;
 }
-.desktop-icon-folder{
+.folder .desktop-icon{
     background-image: url(@/assets/folder.png);
     background-repeat: no-repeat;
     background-size: contain;
 }
-.desktop-icon-explorer{
+.explorer .desktop-icon{
     background-image: url(@/assets/explorer.png);
     background-repeat: no-repeat;
     background-size: contain;
+}
+.computer{
+    background-color: var(--back-icon-color-computer);
+}
+.cmd{
+    background-color: var(--back-icon-color-cmd);
+}
+.folder{
+    background-color: var(--back-icon-color-folder);
+}
+.explorer{
+    background-color: var(--back-icon-color-explorer);
+}
+.computer:hover{
+    background-color: var(--back-icon-hover-color-computer);
+}
+.cmd:hover{
+    background-color: var(--back-icon-hover-color-cmd);
+}
+.folder:hover{
+    background-color: var(--back-icon-hover-color-folder);
+}
+.explorer:hover{
+    background-color: var(--back-icon-hover-color-explorer);
+}
+.desktop-empty-space{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 110px;
 }
 .desktop-bar { 
     width: 100%;

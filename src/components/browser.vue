@@ -1,6 +1,9 @@
 <template>
-    <div class="browser" >
-        <div class="browser-header" @mousedown.prevent="$store.commit(`currentWindow`, 'browser'), $store.state.window = 'browser'">
+    <div class="browser" @mousedown="$emit('clickBrowser')">
+        <div class="browser-header" 
+        @mousedown.prevent="
+        $store.state.window = 'browser',
+        $store.state.grabed = true">
             <div class="header-buttons">
                 <div class="header-btn hide-browser" style="position:static"
                     @mouseup="$store.commit('afterClick', '.hide-browser')"
@@ -30,10 +33,10 @@
 </template>
 <script>
 export default {
+    emits:['clickBrowser'],
     data(){
         return{
-            inputLinks: 'http://',
-            // link: 'https://bing.com'
+            inputLinks: 'http://bing.com',
             link: '',
             welcomePage: true
         }
@@ -42,11 +45,13 @@ export default {
         submitLink(){
             this.link = ''
             setTimeout(() =>{this.link = this.inputLinks},100)
-        },reloadPage() {
+        },
+        reloadPage() {
             const currentPage = this.link
             this.link = ''
             setTimeout(() =>{this.link = currentPage},100)
-        },homePage(){
+        },
+        homePage(){
             this.link = 'http://'
             this.inputLinks = 'http://'
         }
@@ -68,7 +73,7 @@ export default {
 .browser-header { 
     height: 20px;
     width: 100%;
-    background-color: grey;
+    background: linear-gradient(to right, grey, lightgrey);
     border-right: 3px solid rgb(195, 195, 195);
 }
 .header-buttons{

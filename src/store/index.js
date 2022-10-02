@@ -37,11 +37,16 @@ export default createStore({
     },
     currentWindow(state, add){
       state.window = add
+
       try{
         document.querySelector('.active-window').classList.remove('active-window')
+        document.querySelector(`.console-header`).style.background = 'linear-gradient(to right, grey, lightgrey)'
+        document.querySelector(`.browser-header`).style.background = 'linear-gradient(to right, grey, lightgrey)'
       }catch{}
-      document.querySelector(`.${add}`).classList.add('active-window')
-      console.log(document.querySelector(`.${add}`).classList);
+      setTimeout(() => {
+        document.querySelector(`.${add}`).classList.add('active-window')
+        document.querySelector(`.${add}-header`).style.background = 'linear-gradient(to right, blue, lightblue)'
+      }, 1);
     }
   },
   actions: {

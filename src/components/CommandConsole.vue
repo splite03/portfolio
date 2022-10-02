@@ -1,11 +1,9 @@
 
 <template>
     <a id="link" target="_blank" href="https://www.google.com/"></a>
-    <div class="console">
+    <div class="console" @mousedown="$emit('clickCmd')">
         <div class="console-header" 
-        @mousedown.left.prevent="
-        $store.commit('currentWindow','console'),
-        $store.commit('grabHeader')">
+        @mousedown.left.prevent="$store.commit('grabHeader')">
             <div class="header-buttons">
                 <div class="header-btn hide-console"
                     @mouseup="$store.commit('afterClick', '.hide-console')"
@@ -35,6 +33,7 @@
 
 <script>
 export default {
+    emits:['clickCmd'],
     data() {
         return{
             textes:['type <help> to see commands..'],
@@ -168,7 +167,7 @@ export default {
     z-index: 12;
 }
 .console-header { 
-    background-color: grey;
+    background: linear-gradient(to right, grey, lightgrey);
     height: 20px;
     width: 100%;
     position: relative;
