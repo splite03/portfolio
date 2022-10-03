@@ -4,13 +4,15 @@
         <div class="browser-header" 
         @mousedown.prevent="
         $store.state.window = 'browser',
-        $store.state.grabed = true">
+        $store.state.grabed = true"
+        @dblclick="$emit('fullscreenBrowser')">
             <div class="header-buttons">
                 <div class="header-btn hide-browser" style="position:static"
                     @mouseup="$store.commit('afterClick', '.hide-browser')"
                     @mousedown="$store.commit('preClick', '.hide-browser')"></div>
                 <div class="header-btn fullscreen-browser" style="position:static"
-                    @mouseup="$store.commit('afterClick', '.fullscreen-browser')"
+                    @mouseup="$store.commit('afterClick', '.fullscreen-browser'),
+                    $emit('fullscreenBrowser')"
                     @mousedown="$store.commit('preClick', '.fullscreen-browser')"></div>
                 <div class="header-btn close-browser" style="position:static"
                     @mouseup="$store.commit('afterClick', '.close-browser'), 
@@ -36,7 +38,7 @@
 </template>
 <script>
 export default {
-    emits:['clickBrowser'],
+    emits:['clickBrowser','fullscreenBrowser'],
     data(){
         return{
             inputLinks: 'http://bing.com',
@@ -63,8 +65,8 @@ export default {
 </script>
 <style>
 .browser { 
-    width: 800px;
-    height: 600px;
+    height: var(--height-browser);
+    width: var(--width-browser);
     min-width: 400px;
     min-height: 400px;
     background-color: white;
@@ -80,6 +82,9 @@ export default {
 .browser-header { 
     height: 20px;
     width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     background: linear-gradient(to right, grey, lightgrey);
     border-right: 3px solid rgb(195, 195, 195);
 }

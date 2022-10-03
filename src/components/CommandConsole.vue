@@ -1,19 +1,26 @@
 
 <template>
     <a id="link" target="_blank" href="https://www.google.com/"></a>
-    <div class="console" @mousedown="$emit('clickCmd')">
-        <div class="resize" @mousedown.prevent="$store.state.sizing = true"></div>
+    <div class="console" 
+    @mousedown="$emit('clickCmd')"
+    @keydown.shift.up.exact.prevent="fontSizeHandler($event)"
+    @keydown.shift.down.exact.prevent="fontSizeHandler($event)">
+        <div class="resize" 
+        @mousedown.prevent="$store.state.sizing = true"
+        @dblclick.exact.prevent="$emit('fullscreenCmd')"></div>
         <div class="console-header" 
-        @mousedown.left.prevent="$store.commit('grabHeader')">
+        @mousedown.left.exact.prevent="$store.commit('grabHeader', $event)"
+        @dblclick.exact="$emit('fullscreenCmd')">
             <div class="header-buttons">
                 <div class="header-btn hide-console"
                     @mouseup="$store.commit('afterClick', '.hide-console')"
                     @mousedown="$store.commit('preClick', '.hide-console')"></div>
                 <div class="header-btn fullscreen-console"
-                    @mouseup="$store.commit('afterClick', '.fullscreen-console')"
+                    @mouseup="$store.commit('afterClick', '.fullscreen-console'),
+                    $emit('fullscreenCmd')"
                     @mousedown="$store.commit('preClick', '.fullscreen-console')"></div>
                 <div class="header-btn close-console" 
-                    @mouseup="$store.commit('afterClick', '.close-console'), 
+                    @mouseup.left.exact="$store.commit('afterClick', '.close-console'), 
                     $store.state.cmdOpened = false,
                     $store.state.window = undefined"
                     @mousedown="$store.commit('preClick', '.close-console')"></div>
@@ -25,8 +32,8 @@
             </div>
             <input class="console-input" 
             @keydown.enter="submitInput()" 
-            @keydown.down="allInputsHandlerDown()" 
-            @keydown.up="allInputsHandlerUp()" 
+            @keydown.down.exact="allInputsHandlerDown()" 
+            @keydown.up.exact="allInputsHandlerUp()" 
             v-model="inputValue" 
             @keydown.esc="inputValue = ''"
             >
@@ -36,7 +43,7 @@
 
 <script>
 export default {
-    emits:['clickCmd'],
+    emits:['clickCmd','fullscreenCmd'],
     data() {
         return{
             textes:['type <help> to see commands..'],
@@ -54,6 +61,20 @@ export default {
         }
     },
     methods:{
+        // ШРИФТ САЙЗ ХЕНДЛЕР, ШИФТ + СТРЕЛКИ ВВЕРХ/ВНИЗ
+
+        fontSizeHandler(e){
+            const font = document.documentElement
+            let size = getComputedStyle(font).getPropertyValue('--font-size-console')
+            let numSize = parseInt(size.split('px')[0])
+
+            console.log(font);
+            console.log(size);
+            console.log(numSize);
+
+            if(e.key === 'ArrowUp' && numSize < 50) font.style.setProperty('--font-size-console',`${numSize += 2}px`) 
+            if(e.key === 'ArrowDown' && numSize > 10) font.style.setProperty('--font-size-console',`${numSize -= 2}px`) 
+        },
 
         // ПОИСК ИМЕНИ ПРОЕКТА В МАССИВЕ С МАССИВАМИ
 
@@ -154,7 +175,11 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@100&display=swap');
-
+@font-face {
+	font-family: 'Pixel Font'; 
+	src: local('Pixel Font'),
+		url(@/fonts/Fifaks10Dev1.ttf); 
+}
 .resize{
     position: absolute;
     right: 0;
@@ -165,8 +190,8 @@ export default {
     cursor: nwse-resize;
 }
 .console { 
-    height: 300px;
-    width: 500px;
+    height: var(--height-console);
+    width: var(--width-console);
     min-width: 400px;
     min-height: 200px;
     background: black;
@@ -201,14 +226,14 @@ export default {
     border-left-color: rgb(230, 230, 230);
 }
 .console-body { 
-    height: 100%;
+    height: calc(100% - 18px);;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     border-right: 3px solid #c2c2c2;
 }
 .console-text-area { 
-    height: 100%;
+    height: calc(100% - 28px);;
     margin: 3px;
     overflow-y: scroll;
     scrollbar-width: 2px;
@@ -220,17 +245,17 @@ export default {
 .console-text { 
     color: var(--fonts-color);
     padding: 4px;
-    font-size: 24px;
+    font-size: var(--font-size-console);
     transition: background .5s ease-in-out;
     background: var(--back-color);
-    font-size: var(--text-size);
-    font-family: 'Noto Sans Display', sans-serif;
+    font-family: 'Book Antiqua';
+    font-weight: 100;
 }
 .console-input { 
     height: 28px;
     background-color: white;
-    font-size: var(--text-size);
-    font-family: 'Noto Sans Display', sans-serif;
+    font-size: var(--font-size-console);
+    font-family: 'Book Antiqua';
     padding: 4px;
     color: black;
     border: 0;

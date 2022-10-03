@@ -1,6 +1,6 @@
 <template>
     <div class="desktop"
-    @mousemove="moveHeaderX($event, $store.state.window), moveHeaderY($event, $store.state.window)"
+    @mousemove="moveHeader($event, $store.state.window)"
     >   
         <div class="desktop-icons">
             <div class="desktop-icon-column">
@@ -29,11 +29,14 @@
             </div>
         </div> 
         <div class="desktop-empty-space" @mousedown="clickIcon('')"></div>
-        <browser v-if="$store.state.browserOpened" @clickBrowser="clickIcon(''), $store.commit('currentWindow','browser')"></browser>
+        <browser v-if="$store.state.browserOpened" 
+        @clickBrowser="clickIcon(''), $store.commit('currentWindow','browser')"
+        @fullscreenBrowser="fullscreen('browser')"></browser>
         <command-console 
         v-if="$store.state.cmdOpened"
         @clickCmd="clickIcon(''),
-        $store.commit('currentWindow','console')"></command-console>
+        $store.commit('currentWindow','console')"
+        @fullscreenCmd="fullscreen('console')"></command-console>
         <div class="desktop-bar">
             <div class="desktop-start"
             @mousedown="$store.commit('preClick', '.desktop-start')"
@@ -51,7 +54,7 @@
     import browser from '@/components/browser.vue'
 export default {
     components:{CommandConsole,browser},
-    props:['clickCmd', 'clickBrowser'],
+    props:['clickCmd', 'clickBrowser','fullscreenCmd','fullscreenBrowser'],
     data() {
         return{
             time: '',
@@ -83,38 +86,71 @@ export default {
             this.root.style.setProperty(`--back-icon-color-${whichIcon}`, 'rgb(255, 255, 255, .35)')
             this.root.style.setProperty(`--back-icon-hover-color-${whichIcon}`, 'rgb(255, 255, 255, 0.5)')
         },
-        moveHeaderX(e, thisWindow = 'desktop'){
-            const pos = document.documentElement.style
-            let leftPos = getComputedStyle(document.documentElement).getPropertyValue(`--left-pos-${thisWindow}`)
-            let startX = parseInt(leftPos.split('px')[0])
-            let currentWindow = document.querySelector(`.${thisWindow}`)
-            let width = parseInt(window.getComputedStyle(currentWindow).width.split('px')[0])
+        moveHeader(e, window = 'desktop'){
+            const root = document.documentElement
+            let currentWindow = document.querySelector(`.${window}`)
+            let currentWidth = getComputedStyle(currentWindow).width 
+            let currentHeight = getComputedStyle(currentWindow).height 
+            let leftPixel = getComputedStyle(root).getPropertyValue(`--left-pos-${window}`)
+            let topPixel = getComputedStyle(root).getPropertyValue(`--top-pos-${window}`)
+            let widthPixel = getComputedStyle(root).getPropertyValue(`--width-${window}`)
+            let heightPixel = getComputedStyle(root).getPropertyValue(`--height-${window}`)
+            let left = parseInt(leftPixel.split('px')[0])
+            let top = parseInt(topPixel.split('px')[0])
+            let width = parseInt(widthPixel.split('px')[0])
+            let height = parseInt(heightPixel.split('px')[0])
 
+            // Проверка на захват перед смещением экрана
             if (this.$store.state.grabed){
-                pos.setProperty(`--left-pos-${thisWindow}`, `${startX+=e.movementX}px`)
+                // Проверка на фулскрин
+                if(currentWidth === '1300px' && currentHeight === '760px') {
+                    this.fullscreenDrop(window)
+                    root.style.setProperty(`--left-pos-${window}`, `${this.$store.state.layerX - 30}px`)
+                    root.style.setProperty(`--top-pos-${window}`, `${this.$store.state.layerY - 5}px`)
+                    console.log('Из проверки: ',e);
+                    return
+                }
+                root.style.setProperty(`--left-pos-${window}`, `${left+=e.movementX}px`)
+                root.style.setProperty(`--top-pos-${window}`, `${top+=e.movementY}px`)
             }
+
             if(this.$store.state.sizing){
-                currentWindow.style.width = `${width + e.movementX}px`
+                root.style.setProperty(`--width-${window}`, `${width+=e.movementX}px`)
+                root.style.setProperty(`--height-${window}`, `${height+=e.movementY}px`)
             }
         },
-        moveHeaderY(e, thisWindow = 'desktop'){
-            const pos = document.documentElement.style
-            let topPos = getComputedStyle(document.documentElement).getPropertyValue(`--top-pos-${thisWindow}`)
-            let startY = parseInt(topPos.split('px')[0])
-            let currentWindow = document.querySelector(`.${thisWindow}`)
-            let height = parseInt(window.getComputedStyle(currentWindow).height.split('px')[0])
+        fullscreen(window = 'desktop'){
+            let currentWindow = document.querySelector(`.${window}`)
+            let desktop = document.querySelector('.desktop')
+            let maxWidth = getComputedStyle(desktop).width
+            let maxHeight = `${parseInt(getComputedStyle(desktop).height.split('px')[0]) - 40}px`
+            let width = getComputedStyle(currentWindow).width 
+            let height = getComputedStyle(currentWindow).height 
 
-            if (this.$store.state.grabed){
-                pos.setProperty(`--top-pos-${thisWindow}`, `${startY+=e.movementY}px`)
+            if (width === maxWidth && height === maxHeight){
+                this.fullscreenDrop(window)
+            }else{
+                currentWindow.style.width = '100%'
+                currentWindow.style.height = 'calc(100% - 40px)'
+                currentWindow.style.top = '0'
+                currentWindow.style.left = '0'
             }
-            if(this.$store.state.sizing){
-                currentWindow.style.height = `${height + e.movementY}px`
-            }
+        },
+        fullscreenDrop(window){
+            let currentWindow = document.querySelector(`.${window}`)
+
+            currentWindow.style.width = `var(--width-${window})`
+            currentWindow.style.height = `var(--height-${window})`
+            currentWindow.style.top = `var(--top-pos-${window})`
+            currentWindow.style.left = `var(--left-pos-${window})`
         }
     },
     mounted() {
+        const iconTitle = document.querySelector('.desktop-icon-title')
+
         this.timeNow()
         window.addEventListener('mouseup', () => this.$store.commit('dropHeader'))
+        iconTitle.addEventListener('dblclick', (e) => e.preevent)
     }
 }
 </script>
@@ -126,6 +162,11 @@ export default {
     --top-pos-browser: 50px;
     --left-pos-console: 150px;
     --top-pos-console: 100px;
+    /* РАЗМЕРЫ ОКОН */
+    --height-browser: 600px;
+    --width-browser: 800px;
+    --height-console: 300px;
+    --width-console: 500px;
     /* ЦВЕТ ФОНА ИКОНОК ПРИ ХОВЕР/КЛИКЕ */
     --back-icon-color-computer: rgba(255, 255, 255, 0);
     --back-icon-hover-color-computer: rgba(255, 255, 255, 0.35);
@@ -135,6 +176,8 @@ export default {
     --back-icon-hover-color-folder: rgba(255, 255, 255, 0.35);
     --back-icon-color-explorer: rgba(255, 255, 255, 0);
     --back-icon-hover-color-explorer: rgba(255, 255, 255, 0.35);
+    /* КОНСОЛЬ */
+    --font-size-console: 20px;
 }
 .desktop { 
     height: 800px;
@@ -164,6 +207,7 @@ export default {
 }
 .desktop-icon-title{
     font-size: 11px;
+    cursor: context-menu;
 }
 .desktop-icon{
     height: 60px;

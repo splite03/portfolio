@@ -5,6 +5,8 @@ export default createStore({
     loaded: false,
     opacity: 0,
     grabed: false,
+    layerX: 0,
+    layerY: 0,
     sizing: false,
     cmdOpened: false,
     browserOpened: false,
@@ -30,8 +32,10 @@ export default createStore({
       document.querySelector(selector).style.borderTop = `2px solid rgb(225, 225, 225)`
       document.querySelector(selector).style.borderLeft = `2px solid rgb(225, 225, 225)`
     },
-    grabHeader(state){
+    grabHeader(state,e){
       state.grabed = true
+      state.layerX = e.layerX
+      state.layerY = e.layerY
     },
     dropHeader(state){
       state.sizing = false
