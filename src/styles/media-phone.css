@@ -1,6 +1,6 @@
 @media (max-width: 1600px) {
     *{
-        font-size: 24px;
+        font-size: 20px;
     }
     h1{
         font-size: 88px;
@@ -18,7 +18,7 @@
         font-size: 16px;
     }
     .navbar-drop-hider{
-        top:41px;
+        top:40px;
     }
     .block-for-avatar{
         height: 340px;
@@ -52,7 +52,7 @@
         font-size: 16px;
     }
     .navbar-drop-hider{
-        top:41px;
+        top:38px;
     }
     .welcome-block{
         margin-top: 80px;
@@ -90,9 +90,6 @@
     }
     .navbar-links a{
         font-size: 16px;
-    }
-    .navbar-drop-hider{
-        top:41px;
     }
     .welcome-block{
         margin-top: 80px;

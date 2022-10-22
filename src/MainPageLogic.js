@@ -147,6 +147,7 @@ export default {
 
     },
     mounted() {
+      console.log(this.$route.path, this.$store.state.loaded);
     this.contentHandler()
     this.stickHider()
     window.addEventListener('scroll', () => {

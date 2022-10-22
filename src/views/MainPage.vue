@@ -60,4 +60,150 @@ export default MainPageLogic
 </script>
 
 <style >
+.welcome-block{
+    margin-top: 120px;
+}
+
+.block-for-avatar{
+    height: 372px;
+    width: 372px;
+    overflow: hidden;
+    margin: 0 0 35px 8px
+}
+.avatar{
+    background-image: url(@/assets/avat.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    transform: translateX(-372px);
+    animation: cubic-bezier(0,0,0,1) img 2s 1.5s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+/* Welcome Hello */
+
+.hello-animation{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 0 35px;
+    min-height: 107px;
+}
+.text{
+    font-size: 96px;
+}
+.stick{
+    background-color: var(--color-theme);
+    height: 22px;
+    width: 2px;
+    display: block;
+}
+.show{
+    display: inline-block;
+}
+.hiden{
+    opacity: 0;
+    display: inline-block;
+}
+
+/* Welcome Text */
+.welcome-text-block{
+    display: flex;
+    flex-direction: column;
+}
+.welcome-text{
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: color 1s 3s forwards ;
+}
+.arrow-button{
+    background-image: url(/src/assets/arr.png);
+    height: 26px;
+    width: 49px;
+    align-self: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: opacity .5s;
+    animation: cubic-bezier(0,0,0,1) arror-up-down 1s infinite alternate;
+}
+.opacity{
+    opacity: 0;
+}
+
+/* About-me  */
+
+.about-me-block { 
+    margin-bottom: 200px;
+}
+.about-me-header { 
+    margin-bottom: 55px;
+    margin-top: 100px;
+}
+.text-about-animation { 
+    min-height: 560px;
+}
+.text-about { 
+    margin-bottom: 45px;
+}
+.back{
+    background-color: #0052d6;
+    color: white;
+}
+.line{
+    text-decoration: line-through;
+}
+.mrgn-left{
+    margin-left: 20px;
+}
+
+/* Проекты */
+
+.my-projects{
+    padding-bottom: 300px;
+}
+
+.my-projects-header{
+    margin-bottom: 40px;
+}
+
+/* Анимации */
+
+@keyframes img {
+    100%{
+      transform: translateX(0);
+      opacity: 1;
+    }
+}
+@keyframes arror-up-down {
+    100%{
+        transform: translateY(10px);
+    }
+}
+@keyframes color {
+    to{
+        opacity: 1;
+    }
+}
+@keyframes underline {
+    0%{
+        top: 50px;
+        transform: scale(.05, 5);
+    }
+    25%{
+        opacity: .5;
+        top: 30px;
+        transform: scale(.05, 0.5);
+    }
+    50%{
+        transform: rotate(180deg) scale(.1, 0.5);
+        opacity: 1;
+    }
+    100%{
+        opacity: 1;
+        top: 30px;
+        transform: rotate(180deg) scale(1, .5);
+    }
+}
 </style>

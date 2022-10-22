@@ -3,8 +3,8 @@
         <div class="container">
             <div class="navbar-links">
                 <div class="navbar-main">
-                    <router-link to="/" @click="scrollToBlock('body')">Главная</router-link>
-                    <div class="themes">
+                    <router-link to="/">Главная</router-link>
+                    <div class="themes" v-if="$route.path === '/main'">
                         <span class="themes-button" @click="slideTheme()"></span>
                             <span class="themes-drop-hider">
                                 <span class="themes-drop">
@@ -23,15 +23,17 @@
                         <span class="navbar-underline"></span>
                     </span>
                     <span class="navbar-link-with-underline">
-                        <a href="" class="navbar-link" @click.prevent="drop()">Проекты</a>
-                        <span class="navbar-underline"></span>
-                        <span class="navbar-drop-hider">
-                            <span class="navbar-drop">
-                                <router-link to="/">Notes</router-link>
-                                <router-link to="/">Tasks</router-link>
-                                <router-link to="/">Toggle</router-link>
+                        <div class="navbar-projects">
+                            <a href="" class="navbar-link" @click.prevent="drop()">Проекты</a>
+                            <span class="navbar-underline"></span>
+                            <span class="navbar-drop-hider">
+                                <span class="navbar-drop">
+                                    <router-link to="/">Notes</router-link>
+                                    <router-link to="/tasks">Tasks</router-link>
+                                    <router-link to="/">Toggle</router-link>
+                                </span>
                             </span>
-                        </span>
+                        </div>
                     </span>
                     <span class="navbar-link-with-underline">
                         <a href="" class="navbar-link" @click.prevent="">Контакты</a>
@@ -52,15 +54,15 @@
 export default {
     props:['scrollToAbout'],
     mounted(){
-        const body = document.querySelector('.content-wrapper')
-        const linksForDrop = document.querySelector('.navbar-drop')
-        const link = document.querySelectorAll('.navbar-link-with-underline a')[1]
+        // const linksForDrop = document.querySelector('.navbar-drop')
+        // const link = document.querySelectorAll('.navbar-link-with-underline a')[1]
 
-        body.addEventListener('click', () => {
-            linksForDrop.classList.remove('drop')
-            link.classList.remove('active')
-            this.slideBack()
-        })
+        // window.addEventListener('click', () => {
+        //     linksForDrop.classList.remove('drop')
+        //     link.classList.remove('active')
+        //     this.slideBack()
+        //     console.log('slideback');
+        // })
     },
     methods:{
         scrollToBlock(i) {
@@ -157,5 +159,165 @@ export default {
 }
 </script>
 <style>
-
+.navbar-links-mobile{
+    display: none;
+}
+.navbar { 
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    height: 60px;
+    width: 100vw;
+    background-color: #3E3D3D;
+    transition: opacity 1s;
+    opacity: 0;
+    background: var(--background-navbar-theme);
+    color: var(--color-navbar-theme);
+    transition: background 1s, color 1s;
+}
+.navbar-links { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+.navbar-links a{
+    font-size: 20px;
+    padding: 5px;
+    transition: color .5s, background .5s;
+}
+.navbar-main{
+    display: flex;
+    align-items: center;
+}
+.themes { 
+    margin-left: 40px;
+    display: flex;
+}
+.themes-button { 
+    background-image: var(--theme-img-white);
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 40px;
+    width: 40px;
+    display: block;
+    cursor: pointer;
+    transition: transform .3s, background-image .6s, background-color .6s;
+    border: 2px solid rgba(255, 255, 255, 0);
+    border-radius: 50%;
+    background-color: none;
+}
+.themes-button:hover{
+    transform: rotate(var(--deg));
+}
+.rotate{
+    transform: rotate(180deg);
+}
+.themes-drop-hider{
+    overflow: hidden;
+    position: relative;
+    height: 40px;
+    width: 200px;
+}
+.themes-drop { 
+    position: absolute;
+    height: 40px;
+    width: 200px;
+    display: flex;
+    right: 200px;
+    transition: right 1s;
+}
+.theme-button-color { 
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 40px;
+    width: 40px;
+    display: block;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0);
+    border-radius: 50%;
+}
+.theme-button-color.white{
+    background-image: url(/src/assets/theme-white.png);
+}
+.theme-button-color.dark{
+    background-image: url(/src/assets/theme-dark.png);
+}
+.theme-button-color.red{
+    background-image: url(/src/assets/theme-red.png);
+}
+.theme-button-color.yellow{
+    background-image: url(/src/assets/theme-yellow.png);
+}
+.theme-button-color.blue{
+    background-image: url(/src/assets/theme-blue.png);
+}
+.slided{
+    right: 0;
+}
+.navbar-right { 
+    display: flex;
+    align-items: center;
+}
+.navbar-link-with-underline{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 52px;
+    position: relative;
+}
+.navbar-link:hover .navbar-underline{ 
+    animation: underline 1.2s forwards ;
+}
+.navbar-underline{
+    height: 6px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    opacity: 0;
+    position: absolute;
+    top: 50px;
+}
+.active{
+    color: rgb(176, 176, 176);
+}
+.navbar-drop{
+    display: flex;
+    width: 150px;
+    position: absolute;
+    top: -150px;
+    background: var(--background-navbar-drop-theme);
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-around;
+    z-index: 0;
+    transition: top .6s ease-in-out, opacity 1s, background 1s;
+}
+.navbar-drop a{
+    text-align: center;
+    padding: 10px 5px;
+    font-size: 20px;
+}
+.navbar-drop a:hover{
+    background: var(--background-navbar-theme);
+    color: var(--color-theme);
+}
+.navbar-drop-hider{
+    display: flex;
+    height: 150px;
+    width: 120%;
+    overflow: hidden;
+    position: absolute;
+    top:46px;
+    left: -10%;
+    align-content: center;
+    justify-content: center;
+}
+.drop{
+    top: 0;
+}
+.content-wrapper{
+    transition: opacity 1s;
+    opacity: 0;
+}
 </style>
