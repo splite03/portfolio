@@ -6,7 +6,7 @@
         font-size: 88px;
     }
     .container{
-        max-width: 1000px;
+        max-width: 1200px;
     }
     .navbar{
         height: 54px;
@@ -31,6 +31,19 @@
     .text{
         font-size: 88px;
     }
+    :root{
+        --tasks-fz: 20px;
+        --tasks-area-header-fz: 58px;
+        --tasks-area-description-fz: 20px;
+        --tasks-area-button-fz: 20px;
+        --sort-mr: 150px;
+    }
+    .tasks-list{
+        min-width: 282px;
+    }
+    .tasks-preview{
+        max-width: 250px;
+    }
 }
 @media (max-width: 1440px) {
     *{
@@ -40,7 +53,7 @@
         font-size: 80px;
     }
     .container{
-        max-width: 950px;
+        max-width: 1100px;
     }
     .navbar{
         height: 54px;
@@ -71,6 +84,59 @@
     .about-me-header{
         margin-bottom: 20px;
     }
+    :root{
+        --tasks-fz: 16px;
+        --tasks-area-header-fz: 52px;
+        --tasks-area-description-fz: 20px;
+        --tasks-area-button-fz: 20px;
+        --sort-mr: 126px;
+    }
+    .tasks-preview{
+        max-width: 200px;
+        padding: 12px;
+    }
+    .tasks-list{
+        min-width: 232px;
+    }
+    .tasks-preview-remove{
+        top: 5px;
+        right: 5px;
+        height: 12px;
+        width: 12px;
+    }
+}
+@media (max-width: 1150px) {
+    .container{
+        max-width: 900px;
+    }
+    :root{
+        --tasks-fz: 16px;
+        --tasks-area-header-fz: 48px;
+        --tasks-area-description-fz: 20px;
+        --tasks-area-button-fz: 20px;
+        --sort-mr: 125px;
+    }
+    .tasks-preview{
+        max-width: 200px;
+        padding: 12px;
+    }
+    .tasks-list{
+        min-width: 232px;
+    }
+    .tasks-preview-remove{
+        top: 5px;
+        right: 5px;
+        height: 12px;
+        width: 12px;
+    }
+    .tasks-area-button-onwork{
+        padding: 7px;
+    }
+}
+@media (max-width: 950px) {
+    .container{
+        max-width: 760px;
+    }
 }
 @media (max-width: 820px) {
     *{
@@ -80,7 +146,7 @@
         font-size: 80px;
     }
     .container{
-        max-width: 780px;
+        max-width: 650px;
     }
     .navbar{
         height: 54px;
@@ -108,8 +174,31 @@
     .about-me-header{
         margin-bottom: 20px;
     }
+    :root{
+        --tasks-fz: 16px;
+        --tasks-area-header-fz: 48px;
+        --tasks-area-description-fz: 20px;
+        --tasks-area-button-fz: 20px;
+        --sort-mr: 125px;
+    }
+    .tasks-preview{
+        max-width: 200px;
+        padding: 12px;
+    }
+    .tasks-list{
+        min-width: 232px;
+    }
+    .tasks-preview-remove{
+        top: 5px;
+        right: 5px;
+        height: 12px;
+        width: 12px;
+    }
+    .tasks-area-button-onwork{
+        padding: 7px;
+    }
 }
-@media (max-width: 400px) {
+@media (max-width: 500px) {
     *{
         font-size: 14px;
     }
@@ -168,6 +257,53 @@
     }
     #second-stick{
         height: 14px;
+    }
+
+    /* TASKS */
+    :root{
+        --tasks-fz: 16px;
+        --tasks-area-header-fz: 24px;
+        --tasks-area-description-fz: 20px;
+        --tasks-area-button-fz: 12px;
+        --sort-mr: 0;
+    }
+    #sort{
+        margin: 0;
+    }
+    .cross-button-area{
+        margin: 0 10px 0 15px;
+    }
+    .tasks-wrapper{
+        margin-top: 65px;
+    }
+    .tasks-body{
+        flex-direction: column;
+    }
+    .tasks-list {
+        max-height: 20%;
+        min-width: 232px;
+        margin: 16px;
+        /* min-width: 104%; */
+        /* padding: 0; */
+    }
+    .tasks-preview {
+        max-width: 100%;
+    }
+    .tasks-area{
+        padding: 38px 20px;
+        margin-top: 0;
+    }
+    .tasks-area-header-wrapper{
+        margin-bottom: 40px;
+    }
+    .tasks-area-header-wrapper .status-circle{
+        height: 14px;
+        width: 14px;
+
+    }
+    .tasks-area-deadline{
+        margin-right: 10px;
+        width: 100px;
     }
 
 }

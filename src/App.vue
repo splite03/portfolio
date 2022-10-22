@@ -25,6 +25,7 @@
     font-size: 28px;
     font-weight: bold;
     color: var(--color-theme), color 1s;
+    scroll-behavior: smooth;
 }
 :root{
     --background-theme: none;
@@ -42,7 +43,7 @@
 }
 body{
   height: 100vh;
-  width: 99vw;
+  width: 98vw;
   background: var(--background-theme);
   color: var(--color-theme);
   transition: background 1s,color 1s;

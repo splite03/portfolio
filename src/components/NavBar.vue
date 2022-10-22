@@ -3,8 +3,9 @@
         <div class="container">
             <div class="navbar-links">
                 <div class="navbar-main">
-                    <router-link to="/">Главная</router-link>
-                    <div class="themes" v-if="$route.path === '/main'">
+                    <router-link to="/" v-if="$route.path !== '/'">Главная</router-link>
+                    <a href="#content-wrapper" v-else>Главная</a>
+                    <div class="themes" v-if="$route.path === '/'">
                         <span class="themes-button" @click="slideTheme()"></span>
                             <span class="themes-drop-hider">
                                 <span class="themes-drop">
@@ -19,14 +20,14 @@
                 </div>
                 <div class="navbar-right">
                     <span class="navbar-link-with-underline">
-                        <a href="" class="navbar-link" @click.prevent="scrollToAbout()">Обо мне</a>
+                        <a href="#about-me" class="navbar-link" v-if="$route.path === '/'">Обо мне</a>
                         <span class="navbar-underline"></span>
                     </span>
                     <span class="navbar-link-with-underline">
                         <div class="navbar-projects">
                             <a href="" class="navbar-link" @click.prevent="drop()">Проекты</a>
                             <span class="navbar-underline"></span>
-                            <span class="navbar-drop-hider">
+                            <span class="navbar-drop-hider" v-if="droped">
                                 <span class="navbar-drop">
                                     <router-link to="/">Notes</router-link>
                                     <router-link to="/tasks">Tasks</router-link>
@@ -34,10 +35,6 @@
                                 </span>
                             </span>
                         </div>
-                    </span>
-                    <span class="navbar-link-with-underline">
-                        <a href="" class="navbar-link" @click.prevent="">Контакты</a>
-                        <span class="navbar-underline"></span>
                     </span>
                 </div>
             </div>
@@ -53,34 +50,30 @@
 <script>
 export default {
     props:['scrollToAbout'],
-    mounted(){
-        // const linksForDrop = document.querySelector('.navbar-drop')
-        // const link = document.querySelectorAll('.navbar-link-with-underline a')[1]
-
-        // window.addEventListener('click', () => {
-        //     linksForDrop.classList.remove('drop')
-        //     link.classList.remove('active')
-        //     this.slideBack()
-        //     console.log('slideback');
-        // })
+    data(){
+        return{
+            droped: false
+        }
     },
     methods:{
-        scrollToBlock(i) {
-            const p = document.querySelector(i).offsetTop - 400
-            scrollTo({top: p, behavior: 'smooth'})
-        },
         drop() {
-            const linksForDrop = document.querySelector('.navbar-drop')
-            const link = document.querySelectorAll('.navbar-link-with-underline a')[1]
-            const droped = document.querySelector('.drop')
+            this.droped = true
+            setTimeout(() => {
+                const linksForDrop = document.querySelector('.navbar-drop')
+                const link = document.querySelectorAll('.navbar-link-with-underline a')[1]
+                const droped = document.querySelector('.drop')
 
-            if(droped){
-                linksForDrop.classList.remove('drop')
-                link.classList.remove('active')
-            }else{
-                linksForDrop.classList.add('drop')
-                link.classList.add('active')
-            }
+                if(droped){
+                    linksForDrop.classList.remove('drop')
+                    link.classList.remove('active')
+                    setTimeout(() => {
+                        this.droped = false
+                    }, 600)
+                }else{
+                    linksForDrop.classList.add('drop')
+                    link.classList.add('active')
+                }
+            }, 1)
         },
         slideBack(){
             const mainButton = document.querySelector('.themes-button')

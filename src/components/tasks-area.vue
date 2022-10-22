@@ -1,20 +1,20 @@
 <template>
     <div class="tasks-area-wrapper" v-if="task">
         <div class="tasks-area-header-wrapper">
-            <div :class="`status-circle ${statusHandler(task.status)}`" style="height: 32px; width: 32px"></div>
+            <div :class="`status-circle ${statusHandler(task.status)}`"></div>
             <h1 class="tasks-area-header">{{task.title}}</h1>
         </div>
-        <p class="tasks-area-description">{{task.description}}</p>
+        <pre class="tasks-area-description">{{task.description}}</pre>
         <div class="tasks-area-buttons">
-            <div class="tasks-area-deadline" v-if="showDeadline()">{{currentDeadline}}</div>
-            <div class="tasks-area-button-onwork"
+            <button class="tasks-area-deadline" v-if="showDeadline()">{{currentDeadline}}</button>
+            <button class="tasks-area-button-onwork"
                 v-if="task.status === 'created'"
                 @click="task.status = 'onwork', $emit('recount')"
-            >Взять в разработку</div>
-            <div class="tasks-area-button-done"
+            >Взять в разработку</button>
+            <button class="tasks-area-button-done"
             v-if="task.status === 'onwork'"
             @click="task.status = 'done', $emit('recount')"
-            >Выполнено</div>
+            >Выполнено</button>
         </div>
     </div>
 </template>
@@ -70,7 +70,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 *{
     font-size: 20px;
 }
@@ -79,7 +79,7 @@ export default {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    height: 100%;
+    min-height: 100%;
 }
 .tasks-area-header-wrapper { 
     display: flex;
@@ -105,8 +105,18 @@ export default {
 .red { 
     background-color: red;
 }
+.tasks-area-header-wrapper .status-circle{
+    height: 32px;
+    width: 32px;
+}
 .tasks-area-header{
-    font-size: 64px;
+    font-size: var(--tasks-area-header-fz);
+    max-width: calc(100% - 42px);
+}
+.tasks-area-description{
+    white-space: break-spaces;
+    margin-bottom: 40px;
+    font-size: var(--tasks-area-description-fz);
 }
 .tasks-area-buttons{
     display: flex;
@@ -114,18 +124,22 @@ export default {
     margin-top: auto;
 }
 .tasks-area-deadline { 
-    padding: 15px 40px;
+    padding: 15px 15px;
     background-color: #7B7B7B;
     border-radius: 9px;
+    border: 0;
     color: white;
     margin-right: 40px;
     width: 210px;
+    font-size: var(--tasks-area-button-fz);
     text-align: center;
 }
 .tasks-area-button-onwork { 
     padding: 16px 22px 13px;
     background-color: yellow;
     border-radius: 9px;
+    border: 0;
+    font-size: var(--tasks-area-button-fz);
     color: #5A5B00;
     cursor: pointer;
 }
@@ -133,7 +147,9 @@ export default {
     padding: 16px 22px 13px;
     background-color: #52FF00;
     border-radius: 9px;
+    border: 0;
     color: #1a5300;
     cursor: pointer;
+    font-size: var(--tasks-area-button-fz);
 }
 </style>

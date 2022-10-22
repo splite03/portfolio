@@ -1,60 +1,118 @@
 <template>
     <navbar></navbar>
     <div class="container">
-        <div class="tasks-outer">
+        <div class="tasks-outer" v-if="mobileNow">
             <div class="tasks-wrapper">
-            <div class="tasks-header">
-                <select name="sort" id="sort">
-                    <option value="">Сортировка</option>
-                    <option value="date">По дате</option>
-                    <option value="status">По статусу</option>
-                </select>
-                <div class="tasks-counter">
-                    <div class="counter-with-circle">
-                        <div class="status-circle grey" style="margin-right: 6px"></div>
-                        <div class="counter">{{createdTasks}}</div>
-                    </div>
-                    <div class="counter-with-circle">
-                        <div class="status-circle yellow" style="margin-right: 6px"></div>
-                        <div class="counter">{{onworkTasks}}</div>
-                    </div>
-                    <div class="counter-with-circle">
-                        <div class="status-circle green" style="margin-right: 6px"></div>
-                        <div class="counter">{{doneTasks}}</div>
-                    </div>
-                    <div class="counter-with-circle">
-                        <div class="status-circle red" style="margin-right: 6px"></div>
-                        <div class="counter">{{firedTasks}}</div>
-                    </div>
-                </div>
-                <div class="cross-button-area" @click="taskCreatorOpened = !taskCreatorOpened, removeSelect()">
-                    <cross-button></cross-button>
-                </div>
-            </div>
-            <div class="tasks-body">
-                <div class="tasks-list">
-                    <div class="tasks-preview" v-for="(task, idx) in tasks" :key="task"
-                    @click="$router.push(`/tasks/` + idx), selectTask(idx),taskCreatorOpened = false">
-                        <div class="tasks-preview-header-with-circle">
-                            <div :class="`status-circle ${statusHandler(task.status)}`"></div>
-                            <p class="tasks-preview-header">{{task.title}}</p>
+                <div class="tasks-header">
+                    <select name="sort" id="sort">
+                        <option value="">Сортировка</option>
+                        <option value="date">По дате</option>
+                        <option value="status">По статусу</option>
+                    </select>
+                    <div class="tasks-counter">
+                        <div class="counter-with-circle">
+                            <div class="status-circle grey-circle" style="margin-right: 6px"></div>
+                            <div class="counter">{{createdTasks}}</div>
                         </div>
-                        <p class="tasks-preview-description">{{task.description}}</p>
-                        <cross-button 
-                        @clickCross="removeTask(idx)"></cross-button>
+                        <div class="counter-with-circle">
+                            <div class="status-circle yellow-circle" style="margin-right: 6px"></div>
+                            <div class="counter">{{onworkTasks}}</div>
+                        </div>
+                        <div class="counter-with-circle">
+                            <div class="status-circle green-circle" style="margin-right: 6px"></div>
+                            <div class="counter">{{doneTasks}}</div>
+                        </div>
+                        <div class="counter-with-circle">
+                            <div class="status-circle red-circle" style="margin-right: 6px"></div>
+                            <div class="counter">{{firedTasks}}</div>
+                        </div>
+                    </div>
+                    <div class="cross-button-area" @click="taskCreatorOpened = !taskCreatorOpened, removeSelect(), listMaxHeight('15%')"
+                    @touch="listMaxHeight('20%')">
+                        <cross-button></cross-button>
                     </div>
                 </div>
-                <div class="tasks-area">
-                    <tasks-area 
-                    :task-Id="$route.params.taskId"
-                    @recount="statusCounterHandler()"
-                    v-if="!taskCreatorOpened"
-                    ></tasks-area>
-                    <tasks-area-creator v-if="taskCreatorOpened"
-                    @closeCreator="taskCreatorOpened = false"></tasks-area-creator>
+                <div class="tasks-body">
+                    <div class="tasks-list" @touchmove="listMaxHeight('80%')">
+                        <div class="tasks-preview" v-for="(task, idx) in tasks" :key="task"
+                        @click="$router.push(`/tasks/` + idx), selectTask(idx),taskCreatorOpened = false">
+                            <div class="tasks-preview-header-with-circle">
+                                <div :class="`status-circle ${statusHandler(task.status)}`"></div>
+                                <p class="tasks-preview-header">{{task.title}}</p>
+                            </div>
+                            <p class="tasks-preview-description">{{task.description}}</p>
+                            <cross-button 
+                            @clickCross="removeTask(idx)"></cross-button>
+                        </div>
+                    </div>
+                    <div class="tasks-area" @touchstart="listMaxHeight('15%')">
+                        <tasks-area 
+                        :task-Id="$route.params.taskId"
+                        @recount="statusCounterHandler()"
+                        v-if="!taskCreatorOpened"
+                        ></tasks-area>
+                        <tasks-area-creator v-if="taskCreatorOpened"
+                        @closeCreator="taskCreatorOpened = false"></tasks-area-creator>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="tasks-outer" v-if="!mobileNow">
+            <div class="tasks-wrapper">
+                <div class="tasks-header">
+                    <select name="sort" id="sort">
+                        <option value="">Сортировка</option>
+                        <option value="date">По дате</option>
+                        <option value="status">По статусу</option>
+                    </select>
+                    <div class="tasks-counter">
+                        <div class="counter-with-circle">
+                            <div class="status-circle grey-circle" style="margin-right: 6px"></div>
+                            <div class="counter">{{createdTasks}}</div>
+                        </div>
+                        <div class="counter-with-circle">
+                            <div class="status-circle yellow-circle" style="margin-right: 6px"></div>
+                            <div class="counter">{{onworkTasks}}</div>
+                        </div>
+                        <div class="counter-with-circle">
+                            <div class="status-circle green-circle" style="margin-right: 6px"></div>
+                            <div class="counter">{{doneTasks}}</div>
+                        </div>
+                        <div class="counter-with-circle">
+                            <div class="status-circle red-circle" style="margin-right: 6px"></div>
+                            <div class="counter">{{firedTasks}}</div>
+                        </div>
+                    </div>
+                    <div class="cross-button-area" @click="taskCreatorOpened = !taskCreatorOpened, removeSelect()"
+                    @touch="listMaxHeight('20%')">
+                        <cross-button></cross-button>
+                    </div>
+                </div>
+                <div class="tasks-body">
+                    <div class="tasks-list">
+                        <div class="tasks-preview" v-for="(task, idx) in tasks" :key="task"
+                        @click="$router.push(`/tasks/` + idx), selectTask(idx),taskCreatorOpened = false">
+                            <div class="tasks-preview-header-with-circle">
+                                <div :class="`status-circle ${statusHandler(task.status)}`"></div>
+                                <p class="tasks-preview-header">{{task.title}}</p>
+                            </div>
+                            <p class="tasks-preview-description">{{task.description}}</p>
+                            <cross-button 
+                            @clickCross="removeTask(idx)"></cross-button>
+                        </div>
+                    </div>
+                    <div class="tasks-area">
+                        <tasks-area 
+                        :task-Id="$route.params.taskId"
+                        @recount="statusCounterHandler()"
+                        v-if="!taskCreatorOpened"
+                        ></tasks-area>
+                        <tasks-area-creator v-if="taskCreatorOpened"
+                        @closeCreator="taskCreatorOpened = false"></tasks-area-creator>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -88,7 +146,7 @@ export default {
                 },
                 {
                 title: 'Вторая задача',
-                description: 'Описание задачи заключается в грамотном и компактном составление тз к предстоящей задаче.',
+                description: 'Описание задачи заключается в грамотном и компактном составление тз к предстоящей задаче.\nОписание задачи заключается в грамотном и компактном составление тз к предстоящей задаче.',
                 status: 'created',
                 dateCreated: new Date(2022, 9, 21, 2, 13, 0),
                 deadline: new Date(2022, 9, 25, 8, 0, 0)
@@ -98,14 +156,42 @@ export default {
                 description: 'Описание задачи заключается в грамотном и компактном составление тз к предстоящей задаче.',
                 status: 'done',
                 dateCreated: new Date(2022, 9, 21, 0, 45, 0),
-                deadline: new Date(2022, 9, 23, 12, 0, 0)
+                deadline: new Date(2022, 8, 23, 12, 0, 0)
                 },
                 {
                 title: 'Четвертая задача',
                 description: 'Описание задачи заключается в грамотном и компактном составление тз к предстоящей задаче.',
                 status: 'fired',
                 dateCreated: new Date(2022, 9, 21, 0, 45, 0),
+                deadline: new Date(2022, 8, 23, 12, 0, 0)
+                },
+                {
+                title: 'Первая задача',
+                description: 'Описание задачи заключается в грамотном и компактном составление тз к предстоящей задаче.',
+                status: 'created',
+                dateCreated: new Date(2022, 9, 21, 2, 29, 0),
                 deadline: new Date(2022, 9, 23, 12, 0, 0)
+                },
+                {
+                title: 'Вторая задача',
+                description: 'Описание задачи заключается в грамотном и компактном составление тз к предстоящей задаче.\nОписание задачи заключается в грамотном и компактном составление тз к предстоящей задаче.',
+                status: 'created',
+                dateCreated: new Date(2022, 9, 21, 2, 13, 0),
+                deadline: new Date(2022, 9, 25, 8, 0, 0)
+                },
+                {
+                title: 'Третья задача',
+                description: 'Описание задачи заключается в грамотном и компактном составление тз к предстоящей задаче.',
+                status: 'done',
+                dateCreated: new Date(2022, 9, 21, 0, 45, 0),
+                deadline: new Date(2022, 8, 23, 12, 0, 0)
+                },
+                {
+                title: 'Четвертая задача',
+                description: 'Описание задачи заключается в грамотном и компактном составление тз к предстоящей задаче.',
+                status: 'fired',
+                dateCreated: new Date(2022, 9, 21, 0, 45, 0),
+                deadline: new Date(2022, 8, 23, 12, 0, 0)
                 }
             ],
             createdTasks: 0,
@@ -113,6 +199,17 @@ export default {
             doneTasks: 0,
             firedTasks: 0,
             taskCreatorOpened: false
+        }
+    },
+    computed:{
+        tasksList(){
+            return document.querySelector('.tasks-list')
+        },
+        maxWidth(){
+            return window.getComputedStyle(document.querySelector('.container')).maxWidth
+        },
+        mobileNow(){
+            return this.maxWidth === '650px' ? true : false
         }
     },
     methods:{
@@ -148,16 +245,17 @@ export default {
             this.firedTasks = counter
         },
         statusHandler(status){
-            if (status === 'created') return 'grey'
-            if (status === 'onwork') return 'yellow'
-            if (status === 'done') return 'green'
-            if (status === 'fired') return 'red'
+            if (status === 'created') return 'grey-circle'
+            if (status === 'onwork') return 'yellow-circle'
+            if (status === 'done') return 'green-circle'
+            if (status === 'fired') return 'red-circle'
         },
         selectTask(idx){
             let previews = document.querySelectorAll('.tasks-preview')
             try{
                 this.removeSelect()
                 previews[idx].classList.add('selected-preview')
+                this.mobileNow ? this.listMaxHeight('15%') : ''
             }catch {
                 console.log('No tasks here to select');
             }
@@ -171,16 +269,36 @@ export default {
         removeTask(idx){
             this.tasks.splice(idx, 1)
             this.statusCounterHandler()
+        },
+        firedStatusCheck(){
+            for (let task of this.tasks){
+                if(task.deadline - new Date() < 0 && task.status !== 'done' && task.status !== 'fired'){
+                    task.status = 'fired'
+                    alert(`${task.title} was fired`)
+                    this.statusCounterHandler()
+                }
+            }
+        },
+        listMaxHeight(value){
+            this.tasksList.style.maxHeight = value
         }
         
     },
     mounted(){
         this.statusCounterHandler()
+        this.firedStatusCheck()
+        setInterval(() => {
+            this.firedStatusCheck()
+        }, 1000)
+        console.log(this.maxWidth);
+    },
+    updated(){
+        this.firedStatusCheck()
     }
 }
 </script>
 
-<style scoped>
+<style>
 
 *{
     margin: 0;
@@ -191,22 +309,31 @@ export default {
     margin: 0 auto;
     max-width: 1300px;
 }
+/* @media (max-width: 1280px) {
+    .container{
+        max-width: 1100px;
+    }
+} */
 .tasks-outer{
     overflow: hidden;
 }
 :root{
     --tasks-fz: 20px;
-    --tasks-area-fz-header: 64px;
-    --tasks-area-discription: 36px;
-    --tasks-area-button-fz: 24px;
+    --tasks-area-header-fz: 64px;
+    --tasks-area-description-fz: 20px;
+    --tasks-area-button-fz: 20px;
+    --sort-mr: 200px;
 }
 #sort{
     border: 0;
     background: none;
     margin-left: 26px;
-    margin-right: 185px;
+    margin-right: var(--sort-mr);
     font-size: var(--tasks-fz);
     font-weight: 400;
+}
+#sort option{
+    font-size: var(--tasks-fz);
 }
 #sort:focus{
     outline: 0;
@@ -269,7 +396,22 @@ export default {
     margin-right: 0;
     border-radius: 9px;
     background-color: #D8D8D8;
-    min-width: 343px;
+    overflow-y: scroll;
+    min-width: 327px;
+    transition: max-height .3s ease-in-out;
+}
+.tasks-list::-webkit-scrollbar{
+    width: 10px;
+}
+.tasks-list::-webkit-scrollbar-track{
+    background: #D8D8D8;
+    padding: 3px;
+    border-radius: 9px;
+}
+.tasks-list::-webkit-scrollbar-thumb{
+    background-color: #aeaeae;
+    border: 3px solid #D8D8D8   ;
+    border-radius: 9px;
 }
 .tasks-preview { 
     display: flex;
@@ -303,16 +445,16 @@ export default {
 .tasks-preview.status-circle{
     cursor: pointer;
 }
-.grey{
+.grey-circle{
     background-color: #B6B6B6;
 }
-.yellow { 
+.yellow-circle { 
     background-color: #FFF500;
 }
-.green { 
+.green-circle { 
     background-color: #42FF00;
 }
-.red { 
+.red-circle { 
     background-color: red;
 }
 .tasks-preview-header { 
@@ -322,7 +464,7 @@ export default {
     text-overflow: ellipsis;
     overflow: hidden;
     cursor: pointer;
-    max-width: 90%;
+    max-width: calc(100% - 24px);
 }
 .tasks-preview-description { 
     margin-left: 24px;

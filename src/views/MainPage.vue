@@ -3,8 +3,8 @@
 
     <!-- БЛОК ПЕРВИЧНЫЙ -->
 
-    <div class="content-wrapper">
-        <div class="welcome-block">
+    <div class="content-wrapper" id="content-wrapper">
+        <div class="welcome-block" id="welcome-block">
         <div class="container">
             <div class="block-for-avatar">
                 <div class="avatar"></div>
@@ -25,7 +25,7 @@
 
         <!-- БЛОК ОБО МНЕ -->
 
-        <div class="about-me-block">
+        <div class="about-me-block" id="about-me">
             <div class="container">
                 <h1 class="about-me-header">Обо мне</h1>
                 <div class="text-about-animation">
@@ -60,10 +60,9 @@ export default MainPageLogic
 </script>
 
 <style >
-.welcome-block{
-    margin-top: 120px;
+.content-wrapper{
+    padding-top: 120px;
 }
-
 .block-for-avatar{
     height: 372px;
     width: 372px;

@@ -2,11 +2,11 @@
     <div class="tasks-area-input-wrapper">
         <h1 class="tasks-area-creator-header">Создать задачу</h1>
         <label for="title">Заголовок</label>
-        <input @keypress.enter.exact="textarea.focus()" name="title" class="tasks-area-input-header" v-model="inputTitle">
+        <input @input="this.root.style.setProperty('--outline-input-creator', '1px solid black')" @keypress.enter.exact="textarea.focus()" name="title" class="tasks-area-input-header" v-model="inputTitle">
         <label for="description">Описание</label>
         <textarea name="description" class="description" cols="30" rows="10" v-model="inputDescription"></textarea>
         <label for="deadline">Дэд-лайн</label>
-        <input class="deadline-date" name="deadline" type="date" v-model="inputDate">
+        <input :min="currentDay" class="deadline-date" name="deadline" type="date" v-model="inputDate">
         <input class="deadline-time" type="time" v-model="inputTime">
         <button type="submit" class="submit-button" @click="submitTask()">Создать</button>
     </div>
@@ -25,6 +25,26 @@ export default {
     },
     methods:{
         submitTask(){
+            if(this.inputTitle === ''){
+                this.root.style.setProperty('--outline-input-creator', '1px solid red')
+                this.inputTitleEl.focus()
+                return
+            }
+            if(this.inputDescription === ''){
+                this.root.style.setProperty('--outline-textarea-creator', '1px solid red')
+                this.textarea.focus()
+                return
+            }
+            if(this.inputDate === null){
+                this.root.style.setProperty('--outline-date-creator', '1px solid red')
+                this.deadlineDate.focus()
+                return
+            }
+            if(this.inputTime === null){
+                this.root.style.setProperty('--outline-time-creator', '1px solid red')
+                this.deadlineTime.focus()
+                return
+            }
             const date = new Date(`${this.inputDate}T${this.inputTime}`)
 
             this.tasks.push({
@@ -39,9 +59,33 @@ export default {
         }
     },
     computed:{
+        inputTitleEl(){
+            return document.querySelector('.tasks-area-input-header')
+        },
         textarea(){
             return document.querySelector('.description')
+        },
+        deadlineDate(){
+            return document.querySelector('.deadline-date')
+        },
+        deadlineTime(){
+            return document.querySelector('.deadline-time')
+        },
+        currentDay(){
+            let date = new Date()
+            let month = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`
+            let days = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`
+            return `${date.getFullYear()}-${month}-${days}`
+        },
+        root(){
+            return document.documentElement
         }
+    },
+    mounted(){
+        let date = new Date()
+        let month = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`
+        let days = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`
+        console.log(`${date.getFullYear()}-${month}-${days}`); 
     }
 }
 </script>
@@ -49,8 +93,15 @@ export default {
 *{
     font-size: 20px;
 }
+:root{
+    --outline-input-creator: 1px solid black;
+    --outline-textarea-creator: 1px solid black;
+    --outline-date-creator: 1px solid black;
+    --outline-time-creator: 1px solid black;
+}
 .tasks-area-creator-header{
-    font-size: 64px;
+    font-size: var(--tasks-area-header-fz);
+    margin-bottom: 10px;
 }
 .tasks-area-input-wrapper{
     display: flex;
@@ -61,9 +112,11 @@ input{
     border: 0;
     border-radius: 9px;
     margin: 10px 0;
+    transition: outline .3s ease-out;
+    font-size: var(--tasks-fz);
 }
 input:focus{
-    outline: 1px solid black;
+    outline: var(--outline-input-creator);
 }
 textarea{
     padding: 8px 16px;
@@ -71,12 +124,24 @@ textarea{
     border-radius: 9px;
     resize: none;
     margin: 10px 0;
+    font-size: var(--tasks-fz);
+}
+textarea:focus{
+    outline: var(--outline-textarea-creator) ;
 }
 .deadline-date{
     align-self: flex-start;
+    font-size: var(--tasks-fz);
+}
+.deadline-date:focus{
+    outline: var(--outline-date-creator);
 }
 .deadline-time{
     align-self: flex-start;
+    font-size: var(--tasks-fz);
+}
+.deadline-time:focus{
+    outline: var(--outline-time-creator);
 }
 .submit-button{
     padding: 8px 16px;
@@ -85,5 +150,6 @@ textarea{
     border-radius: 9px;
     color: white;
     align-self: center;
+    font-size: var(--tasks-fz);
 }
 </style>
