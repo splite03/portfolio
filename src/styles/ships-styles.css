@@ -1,0 +1,243 @@
+
+/* КОРАБЛИКИ */
+
+.ship{ /* ОБЩАК ДЛЯ КОРАБЛЕЙ */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+}
+.ship-wrapper{
+    position: absolute;
+    z-index: 19;
+}
+.dirigible-wrapper{
+    position: absolute;
+    z-index: 40;
+    height: 48px;
+    width: 93px;
+    left: 472px;
+    top: 178px;
+    animation: up-down 3s infinite alternate steps(10);
+}
+.dirigible { 
+    background-image: url(@/assets/animated-parts/ships/dirigible2.png);
+}
+/* #ff00df - on #26003a - off  :  #ff00dd63 - shadow-on */
+.dirigible-light { 
+    box-shadow: 0 0 32px 17px #ff00dd00;
+    background-color: #26003a;
+    position: absolute;
+}
+.light-one{
+    height: 4px;
+    width: 4px;
+    left: 34px;
+    bottom: 7px;
+    animation: rotate-light-dirigible 4s infinite backwards step-end;
+}
+.light-two{
+    height: 4px;
+    width: 6px;
+    left: 42px;
+    bottom: 7px;
+    animation: rotate-light-dirigible 4s .5s infinite backwards step-end;
+}
+.light-tree{
+    height: 4px;
+    width: 6px;
+    left: 52px;
+    bottom: 7px;
+    animation: rotate-light-dirigible 4s 1s infinite backwards step-end;
+}
+.light-four{
+    height: 3px;
+    width: 3px;
+    left: 63px;
+    bottom: 7px;
+    animation: rotate-light-dirigible 4s 1.5s infinite backwards step-end;
+}
+.between-bildings-ship-wrapper { 
+    height: 12px;
+    width: 19px;
+    top: 673px;
+    left: 47px;
+    animation: between-bildings-ship-move 15s backwards infinite steps(150);
+}
+.between-bildings-ship { 
+    background-image: url(@/assets/animated-parts/ships/between-bildings-ship.png);
+}
+.light-ship { }
+.bird-ship-wrapper { 
+    height: 9px;
+    width: 15px;
+    top: 279px;
+    left: 752px;
+    animation: bird-ship-left-to-right 30s infinite backwards steps(250), up-down 1s alternate infinite  steps(10);
+}
+.bird-ship { 
+    background-image: url(@/assets/animated-parts/ships/bird-ship.png);
+}
+.cool-ship-wrapper { 
+    height: 31px;
+    width: 66px;
+    top: 376px;
+    right: -100px;
+    z-index: 19;
+    animation: ship-moving-left-to-right 20s infinite backwards steps(360);
+}
+.cool-ship { 
+    background-image: url(@/assets/animated-parts/ships/cool-ship.png);
+}
+.fish-ship-wrapper { 
+    height: 46px;
+    width: 91px;
+    top: 256px;
+    left: -100px;
+    animation: 
+    fish-ship-moving-right-to-left 120s infinite steps(250);
+}
+.fish-ship { 
+    background-image: url(@/assets/animated-parts/ships/fish-ship-flying.gif);
+}
+.fish-small-ship-wrapper { 
+    height: 24px;
+    width: 50px;
+    top: 421px;
+    right: 1643px;
+    animation: small-fish-up-down 3s infinite alternate steps(50);
+}
+.fish-small-ship { 
+    background-image: url(@/assets/animated-parts/ships/fish-small-ship-gif.gif);
+    opacity: .65;
+}
+.gun-ship-wrapper { 
+    height: 46px;
+    width: 94px;
+    top: 880px;
+    left: 942px;
+    animation: gun-ship-up 10s 1 steps(100) forwards, 
+    gun-ship-up-slow 2s 10s 1 steps(12) forwards, 
+    gun-ship-down-slow 2s 12s 1 steps(12) forwards,
+    gun-ship-rotate 1s 14s 1 steps(100) forwards,
+    gun-ship-move 12s 14s 1 steps(100) forwards,
+    gun-ship-after-all 40s 40s steps(500) infinite;
+    z-index: 21;
+}
+.gun-ship { 
+    background-image: url(@/assets/animated-parts/ships/gun-ship.png);
+}
+.hot-dog-ship-wrapper { 
+    height: 63px;
+    width: 85px;
+    top: 200px;
+    left: 772px;
+    animation: up-down 2s alternate infinite steps(10);
+    opacity: .7;
+    /* transform: rotateY(180deg); */
+}
+.hot-dog { 
+    /* background-image: url(@/assets/animated-parts/ships/hot-dog-ship-spins.gif); */
+    transition: opacity .2s;
+}
+.hot-dog-light{
+    box-shadow: 0 0 20px 15px rgb(255 0 145);
+    position: absolute;
+    bottom: 26px;
+    left: 4px;
+    animation: hot-dog-light 3.3s infinite backwards steps(5);
+}
+.pink-ship-wrapper { 
+    height: 6px;
+    width: 12px;
+    top: 354px;
+    left: 1478px;
+    opacity: 0;
+    animation: pink-ship-move 10s infinite backwards steps(100), up-down 2s infinite alternate steps(10);
+}
+.pink-ship { 
+    background-image: url(@/assets/animated-parts/ships/pink-ship.png);
+}
+.pistol-ship-wrapper { 
+    height: 15px;
+    width: 30px;
+    top: 386px;
+    left: 311px;
+    animation: pistop-ship-move 10s infinite steps(50);
+}
+.pistol-ship { 
+    background-image: url(@/assets/animated-parts/ships/pistol-ship.png);
+}
+.ship2-wrapper { 
+    height: 15px;
+    width: 21px;
+    top: 606px;
+    left: -144px;
+    transform: scale(5) rotate(20deg);
+    z-index: 42;
+    animation: ship2-move-zome 25s 2s backwards infinite steps(100);
+}
+.ship2 { 
+    background-image: url(@/assets/animated-parts/ships/ship2.png);
+}
+.ship3-wrapper { 
+    height: 18px;
+    width: 28px;
+    top: 594px;
+    left: -39px;
+    transform: scale(3.5) rotate(-15deg);
+    z-index: 42;
+    animation: ship3-1-move-zome 24.5s 2s backwards infinite steps(100);
+}
+.ship3 { 
+    background-image: url(@/assets/animated-parts/ships/ship3.png);
+}
+.ship-one-wrapper { 
+    height: 20px;
+    width: 20px;
+    top: 379px;
+    left: 1336px;
+    animation: up-down 3s alternate infinite steps(10);
+    z-index: 11;
+}
+.ship3-2{
+    left: -153px;
+    top: 545px;
+    transform: scale(3.2) rotate(10deg);
+    z-index: 41;
+    animation: ship3-2-move-zome 24s 2s backwards infinite steps(100);
+}
+.ship-one { 
+    background-image: url(@/assets/animated-parts/ships/ship-one.png);
+}
+.small-bird-flying-ship-wrapper { 
+    width: 20px;
+    height: 11px;
+    right: -10px;
+    top: 340px;
+    animation: moving-left 18s backwards infinite steps(100);
+}
+.small-bird-flying-ship { 
+    background-image: url(@/assets/animated-parts/ships/small-bird-flying-ship.png);
+}
+.small-bird-flying-ship-two-wrapper { 
+    width: 23px;
+    height: 14px;
+    right: -10px;
+    top: 330px;
+    z-index: 11;
+    animation: moving-left 24s backwards infinite steps(130);
+}
+.small-bird-flying-ship-two{
+    background-image: url(@/assets/animated-parts/ships/small-bird-flying-ship-2.png);
+}
+.very-small-ship-wrapper { 
+    height: 9px;
+    width: 13px;
+    top: 100px;
+    animation: up-down 1s alternate infinite steps(5);
+}
+.very-small-ship { 
+    background-image: url(@/assets/animated-parts/ships/very-small-ship.png);
+}

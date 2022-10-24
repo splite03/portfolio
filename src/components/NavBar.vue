@@ -5,7 +5,7 @@
                 <div class="navbar-main">
                     <router-link to="/" v-if="$route.path !== '/'">Главная</router-link>
                     <a href="#content-wrapper" v-else>Главная</a>
-                    <div class="themes" v-if="$route.path === '/'">
+                    <!-- <div class="themes" v-if="$route.path === '/'">
                         <span class="themes-button" @click="slideTheme()"></span>
                             <span class="themes-drop-hider">
                                 <span class="themes-drop">
@@ -16,43 +16,55 @@
                                 <span class="theme-button-color blue" @click="themeHandler('blue')"></span>
                             </span>
                         </span>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="navbar-right">
                     <span class="navbar-link-with-underline">
-                        <a href="#about-me" class="navbar-link" v-if="$route.path === '/'">Обо мне</a>
-                        <span class="navbar-underline"></span>
+                        <a href="#about-me" class="navbar-link" v-if="$route.path === '/'">
+                            <span class="navbar-underline"></span>Обо мне</a>
                     </span>
                     <span class="navbar-link-with-underline">
                         <div class="navbar-projects">
-                            <a href="" class="navbar-link" @click.prevent="drop()">Проекты</a>
-                            <span class="navbar-underline"></span>
+                            <a href="" class="navbar-link" @click.prevent="drop()">
+                                <span class="navbar-underline"></span>Проекты</a>
                             <span class="navbar-drop-hider" v-if="droped">
                                 <span class="navbar-drop">
-                                    <router-link to="/">Notes</router-link>
+                                    <router-link to="/notes">Notes</router-link>
                                     <router-link to="/tasks">Tasks</router-link>
-                                    <router-link to="/">Toggle</router-link>
                                 </span>
                             </span>
                         </div>
                     </span>
                 </div>
             </div>
-            <div class="navbar-links-mobile">
+            <div class="navbar-links-mobile" style="padding: 0 10px">
                 <div class="navbar-main">
-                    <a href="">Главная</a>
+                    <router-link to="/">Главная</router-link>
                 </div>
-                <div class="navbar-button"></div>
+                <burger-menu @clickBurger="mobileDropMenu.classList.add('drop')"></burger-menu>
+                <div class="navbar-mobile-drop">
+                    <cross-button @clickCross="mobileDropMenu.classList.remove('drop')"></cross-button>
+                    <router-link to="/notes">Notes</router-link>
+                    <router-link to="/tasks">Tasks</router-link>
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+import crossButton from '@/components/cross-button.vue'
+import BurgerMenu from '@/components/burger-menu.vue'
 export default {
     props:['scrollToAbout'],
+    components:{crossButton, BurgerMenu},
     data(){
         return{
             droped: false
+        }
+    },
+    computed:{
+        mobileDropMenu(){
+            return document.querySelector('.navbar-mobile-drop')
         }
     },
     methods:{
@@ -60,18 +72,15 @@ export default {
             this.droped = true
             setTimeout(() => {
                 const linksForDrop = document.querySelector('.navbar-drop')
-                const link = document.querySelectorAll('.navbar-link-with-underline a')[1]
                 const droped = document.querySelector('.drop')
 
                 if(droped){
                     linksForDrop.classList.remove('drop')
-                    link.classList.remove('active')
                     setTimeout(() => {
                         this.droped = false
                     }, 600)
                 }else{
                     linksForDrop.classList.add('drop')
-                    link.classList.add('active')
                 }
             }, 1)
         },
@@ -163,11 +172,10 @@ export default {
     height: 60px;
     width: 100vw;
     background-color: #3E3D3D;
-    transition: opacity 1s;
-    opacity: 0;
+    opacity: 1;
     background: var(--background-navbar-theme);
     color: var(--color-navbar-theme);
-    transition: background 1s, color 1s;
+    transition: background 1s, color 1s, opacity 1s;
 }
 .navbar-links { 
     display: flex;
@@ -177,7 +185,6 @@ export default {
 }
 .navbar-links a{
     font-size: 20px;
-    padding: 5px;
     transition: color .5s, background .5s;
 }
 .navbar-main{
@@ -301,13 +308,40 @@ export default {
     width: 120%;
     overflow: hidden;
     position: absolute;
-    top:46px;
+    top:41px;
     left: -10%;
     align-content: center;
     justify-content: center;
 }
 .drop{
     top: 0;
+}
+.navbar-mobile-drop{
+    position: fixed;
+    height: 100vh;
+    width: 0;
+    overflow: hidden;
+    background: grey;
+    right: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: width .3s ease-in-out;
+}
+.navbar-mobile-drop a{
+    font-size: 20px;
+    margin: 10px 20px;
+}
+.navbar-mobile-drop svg{
+    position: static;
+    height: 40px;
+    width: 40px;
+    margin: 10px;
+    align-self: flex-end;
+}
+.drop{
+    width: 20vh;
 }
 .content-wrapper{
     transition: opacity 1s;

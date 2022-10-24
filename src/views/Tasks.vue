@@ -4,10 +4,10 @@
         <div class="tasks-outer" v-if="mobileNow">
             <div class="tasks-wrapper">
                 <div class="tasks-header">
-                    <select name="sort" id="sort">
+                    <select name="sort" id="sort" v-model="selected">
                         <option value="">Сортировка</option>
-                        <option value="date">По дате</option>
-                        <option value="status">По статусу</option>
+                        <option value="date">В процессе</option>
+                        <option value="status">В процессе</option>
                     </select>
                     <div class="tasks-counter">
                         <div class="counter-with-circle">
@@ -63,8 +63,8 @@
                 <div class="tasks-header">
                     <select name="sort" id="sort">
                         <option value="">Сортировка</option>
-                        <option value="date">По дате</option>
-                        <option value="status">По статусу</option>
+                        <option value="date">В процессе</option>
+                        <option value="status">В процессе</option>
                     </select>
                     <div class="tasks-counter">
                         <div class="counter-with-circle">
@@ -84,8 +84,7 @@
                             <div class="counter">{{firedTasks}}</div>
                         </div>
                     </div>
-                    <div class="cross-button-area" @click="taskCreatorOpened = !taskCreatorOpened, removeSelect()"
-                    @touch="listMaxHeight('20%')">
+                    <div class="cross-button-area" @click="taskCreatorOpened = !taskCreatorOpened, removeSelect()">
                         <cross-button></cross-button>
                     </div>
                 </div>
@@ -139,57 +138,15 @@ export default {
             tasks:[
                 {
                 title: 'Первая задача',
-                description: 'Описание задачи заключается в грамотном и компактном составление тз к предстоящей задаче.',
-                status: 'created',
-                dateCreated: new Date(2022, 9, 21, 2, 29, 0),
-                deadline: new Date(2022, 9, 23, 12, 0, 0)
-                },
-                {
-                title: 'Вторая задача',
-                description: 'Описание задачи заключается в грамотном и компактном составление тз к предстоящей задаче.\nОписание задачи заключается в грамотном и компактном составление тз к предстоящей задаче.',
+                description: 'Рассказать про Tasks в двух словах.',
                 status: 'created',
                 dateCreated: new Date(2022, 9, 21, 2, 13, 0),
-                deadline: new Date(2022, 9, 25, 8, 0, 0)
+                deadline: new Date(2023, 9, 25, 8, 0, 0)
                 },
                 {
                 title: 'Третья задача',
-                description: 'Описание задачи заключается в грамотном и компактном составление тз к предстоящей задаче.',
+                description: 'Понять, куда делать третья.',
                 status: 'done',
-                dateCreated: new Date(2022, 9, 21, 0, 45, 0),
-                deadline: new Date(2022, 8, 23, 12, 0, 0)
-                },
-                {
-                title: 'Четвертая задача',
-                description: 'Описание задачи заключается в грамотном и компактном составление тз к предстоящей задаче.',
-                status: 'fired',
-                dateCreated: new Date(2022, 9, 21, 0, 45, 0),
-                deadline: new Date(2022, 8, 23, 12, 0, 0)
-                },
-                {
-                title: 'Первая задача',
-                description: 'Описание задачи заключается в грамотном и компактном составление тз к предстоящей задаче.',
-                status: 'created',
-                dateCreated: new Date(2022, 9, 21, 2, 29, 0),
-                deadline: new Date(2022, 9, 23, 12, 0, 0)
-                },
-                {
-                title: 'Вторая задача',
-                description: 'Описание задачи заключается в грамотном и компактном составление тз к предстоящей задаче.\nОписание задачи заключается в грамотном и компактном составление тз к предстоящей задаче.',
-                status: 'created',
-                dateCreated: new Date(2022, 9, 21, 2, 13, 0),
-                deadline: new Date(2022, 9, 25, 8, 0, 0)
-                },
-                {
-                title: 'Третья задача',
-                description: 'Описание задачи заключается в грамотном и компактном составление тз к предстоящей задаче.',
-                status: 'done',
-                dateCreated: new Date(2022, 9, 21, 0, 45, 0),
-                deadline: new Date(2022, 8, 23, 12, 0, 0)
-                },
-                {
-                title: 'Четвертая задача',
-                description: 'Описание задачи заключается в грамотном и компактном составление тз к предстоящей задаче.',
-                status: 'fired',
                 dateCreated: new Date(2022, 9, 21, 0, 45, 0),
                 deadline: new Date(2022, 8, 23, 12, 0, 0)
                 }
@@ -198,18 +155,14 @@ export default {
             onworkTasks: 0,
             doneTasks: 0,
             firedTasks: 0,
-            taskCreatorOpened: false
+            taskCreatorOpened: false,
+            mobileNow: false,
+            selected: ''
         }
     },
     computed:{
         tasksList(){
             return document.querySelector('.tasks-list')
-        },
-        maxWidth(){
-            return window.getComputedStyle(document.querySelector('.container')).maxWidth
-        },
-        mobileNow(){
-            return this.maxWidth === '650px' ? true : false
         }
     },
     methods:{
@@ -243,6 +196,9 @@ export default {
                 }
             }
             this.firedTasks = counter
+        },
+        maxWidth(){
+            return window.getComputedStyle(document.querySelector('.container')).maxWidth
         },
         statusHandler(status){
             if (status === 'created') return 'grey-circle'
@@ -287,10 +243,14 @@ export default {
     mounted(){
         this.statusCounterHandler()
         this.firedStatusCheck()
+        document.querySelector('body').style.width = '100vw'
         setInterval(() => {
             this.firedStatusCheck()
         }, 1000)
-        console.log(this.maxWidth);
+        window.addEventListener('touchmove',() => {
+            if(this.maxWidth() === 'none') this.mobileNow = true
+            else this.mobileNow = false
+        })
     },
     updated(){
         this.firedStatusCheck()
@@ -309,11 +269,6 @@ export default {
     margin: 0 auto;
     max-width: 1300px;
 }
-/* @media (max-width: 1280px) {
-    .container{
-        max-width: 1100px;
-    }
-} */
 .tasks-outer{
     overflow: hidden;
 }

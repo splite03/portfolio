@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MainPage from '../views/MainPage.vue'
 import Tasks from '../views/Tasks.vue'
+import Notes from '../views/Notes.vue'
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     path: '/tasks/:taskId?',
     alias: '/task',
     component: Tasks
+  },
+  {
+    path: '/notes',
+    alias: '/note',
+    component: Notes
   }
 ]
 

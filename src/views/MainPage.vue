@@ -62,6 +62,7 @@ export default MainPageLogic
 <style >
 .content-wrapper{
     padding-top: 120px;
+    opacity: 1;
 }
 .block-for-avatar{
     height: 372px;
@@ -111,6 +112,7 @@ export default MainPageLogic
 .welcome-text-block{
     display: flex;
     flex-direction: column;
+    margin-bottom: 60px;
 }
 .welcome-text{
     margin-bottom: 32px;
@@ -121,6 +123,7 @@ export default MainPageLogic
     background-image: url(/src/assets/arr.png);
     height: 26px;
     width: 49px;
+    margin-top: 60px;
     align-self: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -135,10 +138,10 @@ export default MainPageLogic
 
 .about-me-block { 
     margin-bottom: 200px;
+    padding-top: 100px;
 }
 .about-me-header { 
     margin-bottom: 55px;
-    margin-top: 100px;
 }
 .text-about-animation { 
     min-height: 560px;
@@ -192,7 +195,7 @@ export default MainPageLogic
     }
     25%{
         opacity: .5;
-        top: 30px;
+        top: 25px;
         transform: scale(.05, 0.5);
     }
     50%{
@@ -201,7 +204,7 @@ export default MainPageLogic
     }
     100%{
         opacity: 1;
-        top: 30px;
+        top: 25px;
         transform: rotate(180deg) scale(1, .5);
     }
 }

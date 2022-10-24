@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    loaded: false,
+    loaded: true,
     opacity: 0,
     grabed: false,
     layerX: 0,

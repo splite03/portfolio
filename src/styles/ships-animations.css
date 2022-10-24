@@ -1,0 +1,227 @@
+
+/* АНИМАШКИ КОРАБЛЕЙ */
+@keyframes bird-ship-left-to-right {
+    0%{
+        opacity: 0;
+        left: 955px;
+    }
+    5%{
+        opacity: .7;
+    }
+    95%{
+        opacity: .7;
+    }
+    100%{
+        left: 180px;
+        opacity: 0;
+    }
+}
+@keyframes between-bildings-ship-move {
+    to{
+        left: 1200px;
+    }
+}
+@keyframes dirigible-move {
+    50%{
+        top: 100px;
+    }
+    100%{
+        top: 109px
+    }
+}
+@keyframes ship-moving-left-to-right {
+    to{
+        right: 10000px;
+    }
+}
+@keyframes fish-ship-moving-right-to-left {
+    30%{
+        left: 270px;
+    }
+    35%{
+        left: 270px;
+    }
+    70%{
+        left: 1500px;
+    }
+    75%{
+        left: 1500px;
+    }
+    100%{
+        left: 2100px;
+    }
+}
+@keyframes small-fish-up-down {
+    to{
+        transform: translateY(10px);
+    }
+}
+@keyframes gun-ship-up {
+    100%{
+        top: 540px;
+    }
+}
+@keyframes gun-ship-up-slow {
+    100%{
+        top: 480px;
+    }
+}
+@keyframes gun-ship-down-slow {
+    100%{
+        top: 500px;
+    }
+}
+@keyframes gun-ship-move {
+    10%{
+        top: 490px;
+    }
+    100%{
+        left: 2100px;
+        top: 490px;
+    }
+}
+@keyframes gun-ship-rotate {
+    100%{
+        transform: rotate(10deg);
+    }
+}
+@keyframes gun-ship-after-all {
+    100%{
+        left: 2100px;
+    }
+}
+@keyframes hot-dog-ship-move {
+    
+}
+@keyframes hot-dog-light {
+    21%{
+        opacity: .1;
+    }
+    33%{
+        opacity: .1;
+    }
+    51%{
+        opacity: 1;
+    }
+    63%{
+        opacity: 1;
+    }
+    71%{
+        opacity: .1;
+    }
+    80%{
+        opacity: .1;
+    }
+    92%{
+        opacity: 1;
+    }
+}
+@keyframes pink-ship-move {
+    15%{
+        opacity: .7;
+    }
+    100%{
+        left: 1226px;
+        opacity: .7;
+    }
+}
+@keyframes pistop-ship-move {
+    40%{
+        opacity: 1;
+    }
+    45%{
+        opacity: .7;
+    }
+    48%{
+        opacity: .5;
+    }
+    50%{
+        transform: scale(0.3);
+        top: 293px;
+        left: 167px;
+        opacity: 0;
+    }
+    100%{
+        transform: scale(0.3);
+        top: 293px;
+        left: 167px;
+        opacity: 0;
+    }
+}
+@keyframes ship2-move-zome {
+    18%{
+        opacity: 1;
+    }
+    20%{
+        top: 493px;
+        left: 231px;
+        transform: scale(.2) rotate(20deg);
+        opacity: 0;
+    }
+    100%{
+        top: 493px;
+        left: 231px;
+        transform: scale(.2) rotate(20deg);
+    }
+}
+@keyframes ship3-1-move-zome {
+    18%{
+        opacity: 1;
+    }
+    20%{
+        top: 489px;
+        left: 231px;
+        transform: scale(.1) rotate(-15deg);
+        opacity: 0;
+    }
+    100%{
+        top: 489px;
+        left: 231px;
+        transform: scale(.1) rotate(-15deg);
+    }
+}
+@keyframes ship3-2-move-zome {
+    18%{
+        opacity: 1;
+    }
+    20%{
+        left: 227px;
+        top: 488px;
+        transform: scale(.1) rotate(10deg);
+        opacity: 0;
+    }
+    100%{
+        left: 227px;
+        top: 488px;
+        transform: scale(.1) rotate(10deg);
+    }
+}
+@keyframes moving-left-small-bird-flying-ship {
+    40%{
+        left: 355px;
+    }
+    100%{
+        left: 355px;
+    }
+}
+@keyframes moving-left {
+    40%{
+        transform: translateX(-2000px);
+    }
+    100%{
+        transform: translateX(-2000px);
+    }
+}
+@keyframes moving-right {
+    40%{
+        transform: translateX(2000px);
+    }
+    100%{
+        transform: translateX(2000px);
+    }
+}
+@keyframes up-down {
+    to{
+        transform: translateY(5px);
+    }
+}

@@ -18,7 +18,7 @@
         font-size: 16px;
     }
     .navbar-drop-hider{
-        top:40px;
+        top:38px;
     }
     .block-for-avatar{
         height: 340px;
@@ -145,8 +145,13 @@
     h1{
         font-size: 80px;
     }
+    body{
+        height: 90vh;
+        width: 100vw;
+    }
     .container{
-        max-width: 650px;
+        max-width: 670px;
+        padding: 0 10px;
     }
     .navbar{
         height: 54px;
@@ -181,6 +186,9 @@
         --tasks-area-button-fz: 20px;
         --sort-mr: 125px;
     }
+    .tasks-wrapper{
+        margin-top: 90px;
+    }
     .tasks-preview{
         max-width: 200px;
         padding: 12px;
@@ -205,15 +213,23 @@
     h1{
         font-size: 60px;
     }
+    body{
+        height: 90vh;
+        width: 100vw;
+    }
     .container{
         padding: 0 10px;
+        margin: 0;
+        max-width: none;
     }
     /* NAVBAR */
     .navbar-links{
         display: none;
     }
     .navbar{
-        padding: 17px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
     .navbar-links-mobile { 
         display: flex;

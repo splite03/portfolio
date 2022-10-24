@@ -43,7 +43,7 @@
 }
 body{
   height: 100vh;
-  width: 98vw;
+  width: 97vw;
   background: var(--background-theme);
   color: var(--color-theme);
   transition: background 1s,color 1s;

@@ -1,0 +1,118 @@
+
+/* СВЕТЯШКИ  /  ЛАМПОЧКИ КОРАБЛЕЙ В СТИЛЕ С КОРАБЛЯМИ*/
+:root{
+    --opacity-light-in-out: 1;
+    --steps: 30;
+}
+
+.light{ /* ОБЩИЙ ДЛЯ СВЕТЯШЕК */
+    position: absolute;
+    z-index: 39;
+}
+.light-left-pink-bord{
+    height: 100px;
+    width: 5px;
+    bottom: 354px;
+    left: 404px;
+    box-shadow: 0 0 50px 60px #ff575790;
+    animation: light-in-out 6s infinite steps(var(--steps));
+    /* animation: light 2s 1s backwards 1; */
+}
+.light-behind-orange-yellow-bord { 
+    z-index: 20;
+    box-shadow: 0 0 100px 50px #fff38dd1;
+    animation: light-in-out 6s .2s infinite steps(var(--steps));
+}
+.light-big-orange-bord { 
+    box-shadow: 0 0 100px 70px #ffa53ac9;
+    animation: light-in-out 6s .4s infinite steps(var(--steps));
+}
+.light-blue-right-bord { 
+    box-shadow: 0 0 95px 68px #57d8ffcc;
+    bottom: 416px;
+    height: 22px;
+    animation: light-in-out 6s .6s infinite steps(var(--steps));
+}
+.light-dark-green-right-bord { 
+    box-shadow: 0 0 99px 28px #20ffa3;
+    animation: light-in-out 6s .8s infinite steps(var(--steps));
+}
+.light-dark-grin-bord-over-prawn { 
+    box-shadow: 0 0 100px 30px #42ffccd9;
+    animation: light-in-out 6s .2s infinite steps(var(--steps));
+}
+.light-inn-pink-bord { 
+    box-shadow: 0 0 80px 20px #f193f6;
+    animation: light-in-out 6s .6s infinite steps(var(--steps));
+}
+.light-left-pink-bord { 
+    box-shadow: 0 0 50px 60px #ff575790;
+    animation: light-in-out 6s .8s infinite steps(var(--steps));
+}
+.light-lower-blue-bord { 
+    box-shadow: 0 0 80px 50px #30dfffe3; 
+    animation: light-in-out 6s 1s infinite steps(var(--steps));
+}
+.light-lower-pink-bord { 
+    box-shadow: 0 0 100px 50px #fa4cfae0;
+    animation: light-in-out 6s .3s infinite steps(var(--steps));
+}
+.light-prawn-bord { 
+    box-shadow: 0 0 100px 30px #e0d7ef;
+    animation: light-in-out 6s 2s infinite steps(var(--steps));
+}
+.light-small-blue-bord-left { 
+    box-shadow: 0 0 40px 10px #86f9d7 steps(var(--steps));
+    bottom: 184px;
+    height: 39px;
+    width: 8px;
+    left: 486px;
+    animation: light-in-out 6s 1.5s infinite steps(var(--steps));
+}
+.light-small-bottom-right-blue-bord { 
+    box-shadow: 0 0 50px 20px #00f8dd;
+    height: 14px;
+    width: 39px;
+    bottom: 51px;
+    left: 1569px;
+    animation: light-in-out 6s 1.7s infinite steps(var(--steps));
+}
+.light-small-yellow-bord-left { 
+    box-shadow: 0 0 50px 20px #fbf7c6;
+    width: 37px;
+    animation: light-in-out 6s 2.3s infinite steps(var(--steps));
+}
+.light-whs-yellow-bord { 
+    box-shadow: 0 0 50px 20px #eeefb1;
+    height: 57px;
+    bottom: 89px;
+    width: 16px;
+    animation: light-in-out 6s 1.4s infinite steps(var(--steps));
+}
+.light-stick{
+    position: absolute;
+    left: 843px;
+    top: 256px;
+    z-index: 19;
+    opacity: .5;
+    transform-origin: bottom left;
+    transform: rotate(10deg);
+    animation: stick-light-rotate 6s infinite alternate steps(50);
+}
+.long-light-stick{
+    position: absolute;
+    left: 1650px;
+    top: 156px;
+    z-index: 21;
+    opacity: 0;
+    transform-origin: bottom left;
+}
+.first-light-stick{
+    animation: long-stick-first-to-start 4s 1 forwards steps(50),
+    long-stick-first-rotate 4.5s 4s infinite alternate steps(70);
+}
+.second-light-stick{
+    transform: rotate(-20deg);
+    animation: long-stick-second-to-start 3s 1 forwards steps(50),
+    long-stick-second-rotate 4.5s 3s infinite alternate steps(70);
+}

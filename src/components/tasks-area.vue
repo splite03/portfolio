@@ -93,16 +93,16 @@ export default {
     background-color: red;
     margin-right: 10px;
 }
-.grey{
+.grey-circle{
     background-color: #B6B6B6;
 }
-.yellow { 
+.yellow-circle { 
     background-color: #FFF500;
 }
-.green { 
+.green-circle { 
     background-color: #42FF00;
 }
-.red { 
+.red-circle { 
     background-color: red;
 }
 .tasks-area-header-wrapper .status-circle{

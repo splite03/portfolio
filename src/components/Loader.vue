@@ -20,13 +20,21 @@ export default {
     // Фейк-загрузка сайта
 
     mounted(){
-      setTimeout(() => {
-        this.$store.state.loaded = true
-      }, 1)
-      setTimeout(() => {
-        document.querySelector('.navbar').style.opacity = 1
-        document.querySelector('.content-wrapper').style.opacity = 1
-      }, 1)
+        try{
+            setTimeout(() => {
+            document.querySelector('.navbar').style.opacity = 0
+            document.querySelector('.content-wrapper').style.opacity = 0
+            }, 1)
+            setTimeout(() => {
+            this.$store.state.loaded = true
+            }, 6500)
+            setTimeout(() => {
+            document.querySelector('.navbar').style.opacity = 1
+            document.querySelector('.content-wrapper').style.opacity = 1
+            }, 7500)
+        }catch{
+            console.log('opened another page');
+        }
     }
 }
 </script>

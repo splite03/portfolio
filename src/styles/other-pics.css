@@ -1,0 +1,86 @@
+.head-zone-click { 
+    position: absolute;
+    bottom: 168px;
+    left: 883px;
+    height: 35px;
+    width: 23px;
+    z-index: 40;
+    cursor: pointer;
+}
+.people-head { 
+    height: 7px;
+    width: 7px;
+    position: absolute;
+    top: 19px;
+    left: 7px;
+}
+.head-move{
+    left: 10px;
+}
+.elevator-wrapper{
+    position: absolute;
+    bottom: 0px;
+    left: 312px;
+    height: 255px;
+    width: 22px;
+    z-index: 41;
+}
+.elevator-path{
+    height: 100%;
+    width: 100%;
+    z-index: 42;
+    background-image: url(@/assets/animated-parts/other/elevator-path.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+}
+.elevator{
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+    height: 41px;
+    width: 22px;
+    background-image: url(@/assets/animated-parts/other/elevator.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 40;
+    animation: elevator-up 10s 1 steps(40) forwards, elevator-down 10s 10s 1 steps(40) forwards;
+}
+.vape{
+    background-image: url(@/assets/animated-parts/other/vape-export.gif);
+    background-size: cover;
+    height: 84px;
+    width: 39px;
+    position: absolute;
+    bottom: 277px;
+    right: 337px;
+    z-index: 20;
+}
+.smoke-guy{
+    background-image: url(@/assets/animated-parts/other/smoke-guy.gif);
+    background-size: cover;
+    height: 49px;
+    width: 42px;
+    position: absolute;
+    bottom: 180px;
+    left: 727px;
+    z-index: 38;
+}
+.rope{
+    position: absolute;
+    z-index: 29;
+}
+.short-rope{
+    width: 102px;
+    height: 48px;
+}
+
+.left-side-short-rope{
+    bottom: 100px;
+    left: 43px;
+}
+.left-side-short-rope-second{
+    bottom: 86px;
+    left: 49px;
+    rotate: -15deg;
+}

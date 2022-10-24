@@ -54,7 +54,7 @@ export default {
                 dateCreated: this.inputDate,
                 deadline: date
             })
-            this.$router.push('/tasks')
+            this.$router.push(`/tasks/${this.tasks.length - 1}`)
             this.$emit('closeCreator')
         }
     },
@@ -82,10 +82,6 @@ export default {
         }
     },
     mounted(){
-        let date = new Date()
-        let month = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`
-        let days = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`
-        console.log(`${date.getFullYear()}-${month}-${days}`); 
     }
 }
 </script>
@@ -107,7 +103,7 @@ export default {
     display: flex;
     flex-direction: column;
 }
-input{
+.tasks-area-input-wrapper input{
     padding: 8px 16px;
     border: 0;
     border-radius: 9px;
@@ -115,10 +111,10 @@ input{
     transition: outline .3s ease-out;
     font-size: var(--tasks-fz);
 }
-input:focus{
+.tasks-area-input-wrapper input:focus{
     outline: var(--outline-input-creator);
 }
-textarea{
+.tasks-area-input-wrapper textarea{
     padding: 8px 16px;
     border: 0;
     border-radius: 9px;
@@ -126,12 +122,13 @@ textarea{
     margin: 10px 0;
     font-size: var(--tasks-fz);
 }
-textarea:focus{
+.tasks-area-input-wrapper textarea:focus{
     outline: var(--outline-textarea-creator) ;
 }
 .deadline-date{
     align-self: flex-start;
     font-size: var(--tasks-fz);
+    background-color: white;
 }
 .deadline-date:focus{
     outline: var(--outline-date-creator);
@@ -139,6 +136,7 @@ textarea:focus{
 .deadline-time{
     align-self: flex-start;
     font-size: var(--tasks-fz);
+    background-color: white;
 }
 .deadline-time:focus{
     outline: var(--outline-time-creator);

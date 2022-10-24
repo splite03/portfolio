@@ -1,0 +1,180 @@
+
+/* БОРДЫ */
+:root{
+    --url-image-animation: var(--left-pink-bord);
+    --url-image-animation-off: var(--left-pink-bord-off);
+    /* TURNED ONN PICS */
+    --left-pink-bord:url(@/assets/animated-parts/bords/left-pink-bord.png);
+    --big-orange-bord:url(@/assets/animated-parts/bords/big-orange-bord.png);
+    --blue-right-bord:url(@/assets/animated-parts/bords/blue-right-bord.png);
+    --dark-green-right-bord:url(@/assets/animated-parts/bords/dark-green-right-bord.png);
+    --dark-grin-bord-over-prawn:url(@/assets/animated-parts/bords/dark-grin-bord-over-prawn.png);
+    --inn-pink-bord:url(@/assets/animated-parts/bords/inn-pink-bord.png);
+    --left-pink-bord:url(@/assets/animated-parts/bords/left-pink-bord.png);
+    --lower-blue-bord:url(@/assets/animated-parts/bords/lower-blue-bord.png);
+    --lower-pink-bord:url(@/assets/animated-parts/bords/lower-pink-bord.png);
+    --prawn-bord:url(@/assets/animated-parts/bords/prawn-bord.png);
+    --small-blue-bord-left:url(@/assets/animated-parts/bords/small-blue-bord-left.png);
+    --small-bottom-right-blue-bord:url(@/assets/animated-parts/bords/small-bottom-right-blue-bord.png);
+    --small-yellow-bord-left:url(@/assets/animated-parts/bords/small-yellow-bord-left.png);
+    --whs-yellow-bord:url(@/assets/animated-parts/bords/whs-yellow-bord.png);
+    /* OFF PICS */
+    --left-pink-bord-off:url(@/assets/animated-parts/bords/left-pink-bord-off.png);
+    --big-orange-bord-off:url(@/assets/animated-parts/bords/big-orange-bord-off.png);
+    --blue-right-bord-off:url(@/assets/animated-parts/bords/blue-right-bord-off.png);
+    --dark-green-right-bord-off:url(@/assets/animated-parts/bords/dark-green-right-bord-off.png);
+    --dark-grin-bord-over-prawn-off:url(@/assets/animated-parts/bords/dark-grin-bord-over-prawn-off.png);
+    --inn-pink-bord-off:url(@/assets/animated-parts/bords/inn-pink-bord-off.png);
+    --left-pink-bord-off:url(@/assets/animated-parts/bords/left-pink-bord-off.png);
+    --lower-blue-bord-off:url(@/assets/animated-parts/bords/lower-blue-bord-off.png);
+    --lower-pink-bord-off:url(@/assets/animated-parts/bords/lower-pink-bord-off.png);
+    --prawn-bord-off:url(@/assets/animated-parts/bords/prawn-bord-off.png);
+    --small-blue-bord-left-off:url(@/assets/animated-parts/bords/small-blue-bord-left-off.png);
+    --small-bottom-right-blue-bord-off:url(@/assets/animated-parts/bords/small-bottom-right-blue-bord-off.png);
+    --small-yellow-bord-left-off:url(@/assets/animated-parts/bords/small-yellow-bord-left-off.png);
+    --whs-yellow-bord-off:url(@/assets/animated-parts/bords/whs-yellow-bord-off.png);
+}
+.bord-wrapper{ /* ОБЩИЕ КЛАССЫ ДЛЯ ВРАПЕРОВ БОРДОВ */
+    overflow: hidden;
+    position: absolute;
+    z-index: 40;
+}
+.bord{ /* ОБЩИЕ КЛАССЫ ДЛЯ БОРДОВ */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    z-index: 41;
+    cursor: pointer;
+    /* animation: test 50s 3s forwards 1; */
+}
+.left-pink-bord-wrapper{
+    height: 13.4%;
+    width: 2.39%;
+    bottom: 36%;
+    left: 20%;
+}
+.left-pink-bord{
+    background-image: url(@/assets/animated-parts/bords/left-pink-bord.png);
+    /* animation: pink-bord 2s 1s forwards 1; */
+}
+.behind-orange-yellow-bord-wrapper { 
+    height: 49px;
+    width: 188px;
+    bottom: 475px;
+    left: 1373px;
+    z-index: 20;
+}
+.behind-orange-yellow-bord { 
+    background-image: url(@/assets/animated-parts/bords/behind-orange-yellow-bord.png);
+}
+.big-orange-bord-wrapper { 
+    height: 76px;
+    width: 226px;
+    bottom: 405px;
+    left: 1187px;
+}
+.big-orange-bord { 
+    background-image: url(@/assets/animated-parts/bords/big-orange-bord.png);
+}
+.blue-right-bord-wrapper {    /* NO-SCALE ANIMATION - BAD SIZING */
+    height: 57px;
+    width: 34px;
+    bottom: 398px;
+    left: 1883px;
+}
+.blue-right-bord { 
+    background-image: url(@/assets/animated-parts/bords/blue-right-bord.png);
+}
+.dark-green-right-bord-wrapper { 
+    height: 67px;
+    width: 32px;
+    bottom: 470px;
+    left: 1776px;
+}
+.dark-green-right-bord { 
+    background-image: url(@/assets/animated-parts/bords/dark-green-right-bord.png);
+}
+.dark-grin-bord-over-prawn-wrapper { 
+    height: 23px;
+    width: 69px;
+    bottom: 494px;
+    left: 809px;
+    /* z-index: 21; */
+}
+.dark-grin-bord-over-prawn { 
+    background-image: url(@/assets/animated-parts/bords/dark-grin-bord-over-prawn.png);
+}
+.inn-pink-bord-wrapper { 
+    height: 57px;
+    width: 17px;
+    bottom: 349px;
+    left: 772px;
+}
+.inn-pink-bord { 
+    background-image: url(@/assets/animated-parts/bords/inn-pink-bord.png);
+}
+.lower-blue-bord-wrapper { 
+    height: 48px;
+    width: 100px;
+    bottom: 217px;
+    left: 559px;
+}
+.lower-blue-bord { 
+    background-image: url(@/assets/animated-parts/bords/lower-blue-bord.png);
+}
+.lower-pink-bord-wrapper { 
+    height: 142px;
+    width: 62px;
+    bottom: 128px;
+    left: 1071px;
+}
+.lower-pink-bord { 
+    background-image: url(@/assets/animated-parts/bords/lower-pink-bord.png);
+}
+.prawn-bord-wrapper { 
+    height: 29px;
+    width: 86px;
+    bottom: 505px;
+    left: 540px;
+}
+.prawn-bord { 
+    background-image: url(@/assets/animated-parts/bords/prawn-bord.png);
+}
+.small-blue-bord-left-wrapper { 
+    height: 43px;
+    width: 10px;
+    bottom: 180px;
+    left: 485px;
+}
+.small-blue-bord-left { 
+    background-image: url(@/assets/animated-parts/bords/small-blue-bord-left.png);
+}
+.small-bottom-right-blue-bord-wrapper { 
+    height: 18px;
+    width: 55px;
+    bottom: 51px;
+    left: 1568px;
+}
+.small-bottom-right-blue-bord { 
+    background-image: url(@/assets/animated-parts/bords/small-bottom-right-blue-bord.png);
+}
+.small-yellow-bord-left-wrapper { 
+    height: 22px;
+    width: 38px;
+    bottom: 255px;
+    left: 163px;
+}
+.small-yellow-bord-left { 
+    background-image: url(@/assets/animated-parts/bords/small-yellow-bord-left.png);
+}
+.whs-yellow-bord-wrapper { /* NO-SCALE ANIMATION - BAD SIZING */
+    height: 72px;
+    width: 18px;
+    bottom: 79px;
+    left: 762px;
+}
+.whs-yellow-bord { 
+    background-image: url(@/assets/animated-parts/bords/whs-yellow-bord.png);
+}

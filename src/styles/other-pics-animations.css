@@ -1,0 +1,16 @@
+@keyframes elevator-up {
+    40%{
+        bottom: 215px;
+    }
+    100%{
+        bottom: 215px;
+    }
+}
+@keyframes elevator-down {
+    40%{
+        bottom: 16px;
+    }
+    100%{
+        bottom: 16px;
+    }
+}
