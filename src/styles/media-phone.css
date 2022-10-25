@@ -68,7 +68,8 @@
         top:38px;
     }
     .welcome-block{
-        margin-top: 80px;
+        margin-top: 0;
+        padding-top: 0px;
     }
     .block-for-avatar{
         height: 300px;
@@ -163,7 +164,8 @@
         font-size: 16px;
     }
     .welcome-block{
-        margin-top: 80px;
+        margin-top: 0;
+        padding-top: 0px;
     }
     .block-for-avatar{
         height: 300px;
@@ -241,6 +243,10 @@
 
     /* WELCOME */
 
+    .content-wrapper{
+        padding: 0;
+    }
+
     .block-for-avatar{
         height: 240px;
         width: 240px;
@@ -259,20 +265,35 @@
         height: 50px;
     }
     .welcome-block{
-        margin-top: 120px;
+        margin-top: 12vh;
     }
     .welcome-text{
         margin-bottom: 20px;
         line-height: 24px;
     }
+    .arrow-button{
+        margin: 0;
+    }
 
+    
     /* ABOUT ME */
-
+    .about-me-block{
+        padding-top: 30px;
+        margin: 0;
+    }
+    
     .text-about { 
         margin-bottom: 26px;
     }
     #second-stick{
         height: 14px;
+    }
+
+    /* DESKTOP */
+
+    .desktop{
+        height: 80vh;
+        width: 92vw;
     }
 
     /* TASKS */
@@ -296,7 +317,7 @@
         flex-direction: column;
     }
     .tasks-list {
-        max-height: 20%;
+        max-height: 15%;
         min-width: 232px;
         margin: 16px;
         /* min-width: 104%; */

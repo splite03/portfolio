@@ -5,6 +5,7 @@ export default {
     components:{NavBar, desktop},
     data() {
       return{
+        stickInterval: null,
         aboutMeBlockChanged: false,
         content: '',
         contentHello:['П','Пр','При','Прив','Приве','Привет','Привет!','Привет','Приве','Прив','При','Пр','П','','H','He','Hel','Hell','Hello','Hello!','Hello','Hell','Hel','He','H',''],
@@ -93,7 +94,7 @@ export default {
         }, n)
       },
       blockContentHandlerAll() {
-        this.changingBlockContentAll('< about-me >', '< Занимаюсь разработкой 2 месяц. За это время успел изучить основы работы с HTML, CSS, SCSS, JavaScript, VueJS, Git />', '< Сделал несколько проектов, реализующих мои персональные запросы по организации дневных задач />', '< Тратил на учебный процесс в среднем по 10 часов в день />', '< Познаю тайные техники “чтобы заработало” />','< Посмотрел 200 серий Наруто />', '< about-me />', 9550)
+        this.changingBlockContentAll('< about-me >', '< Занимаюсь разработкой 2 месяц. За это время успел изучить основы работы с HTML, CSS, SCSS, JavaScript, VueJS, Git />', '< Сделал несколько проектов, реализующих мои персональные запросы по организации дневных задач />', '< Тратил на учебный процесс в среднем по 10 часов в день />', '< Познаю тайные техники “чтобы заработало” />','< Посмотрел 200 серий Наруто />', '</ about-me >', 9550)
       },
       
       // Блоки по одному
@@ -162,5 +163,12 @@ export default {
             this.aboutMeBlockChanged = true
         }
     })
+    },
+    unmounted() {
+      var id = window.setTimeout(function() {}, 0);
+
+      while (id--) {
+        window.clearTimeout(id);
+      }
     }
   }

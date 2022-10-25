@@ -18,7 +18,7 @@
             <div class="welcome-text-block">
                 <div class="welcome-text">{{welcomeText[0]}}</div>
                 <div class="welcome-text">{{welcomeText[1]}}</div>
-                <div class="arrow-button" @click="scrollToAbout()"></div>
+                <a href="#about-me" class="arrow-button"></a>
             </div>
         </div>
         </div>
@@ -163,7 +163,7 @@ export default MainPageLogic
 /* Проекты */
 
 .my-projects{
-    padding-bottom: 300px;
+    padding-bottom: 150px;
 }
 
 .my-projects-header{

@@ -362,13 +362,17 @@
   
 <style scoped>
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Pixel';
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Pixel';
+}
+.container{
+  margin: 0 auto;
+  max-width: 1400px;
 }
 body{
-    height: 100vh;
-    width: 100vw;
+  height: 100vh;
+  width: 100vw;
 }
 </style>

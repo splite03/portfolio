@@ -43,7 +43,8 @@
 }
 body{
   height: 100vh;
-  width: 97vw;
+  overflow-x: hidden;
+  width: 100vw;
   background: var(--background-theme);
   color: var(--color-theme);
   transition: background 1s,color 1s;

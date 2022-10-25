@@ -1,6 +1,5 @@
 
 <template>
-    <a id="link" target="_blank" href="https://www.google.com/"></a>
     <div class="console" 
     @mousedown="$emit('clickCmd')"
     @keydown.shift.up.exact.prevent="fontSizeHandler($event)"
@@ -46,14 +45,12 @@ export default {
     emits:['clickCmd','fullscreenCmd'],
     data() {
         return{
-            textes:['type <help> to see commands..'],
+            textes:['type help to see commands..'],
             projectsTextes:[
-                ['name : notes','technologys : html, css, vue, js','','Первый проект, который я сделал через неделю после начала изучения Front-end разработки. Последний рефактор был сделан на Vue js.'],
-                ['name : tasks','technologys : html, css, vue, js','','Проект по формированию задач и отслеживанием их выполнения.'],
-                ['name : notes3','technologys : html, css, vue, js','','Первый проект, который я сделал через неделю после начала изучения Front-end разработки. Последний рефактор был сделан на Vue js.'],
-                ['name : notes4','technologys : html, css, vue, js','','Первый проект, который я сделал через неделю после начала изучения Front-end разработки. Последний рефактор был сделан на Vue js.'],
+                ['name : notes','technologys : html, css, vue, js','','Первый проект, который я сделал через неделю после начала изучения Front-end разработки. Последний рефактор был сделан на Vue js.', 'project.current - перейти к проекту'],
+                ['name : tasks','technologys : html, css, vue, js','','Проект по формированию задач и отслеживанием их выполнения.', 'project.current - перейти к проекту'],
             ],
-            helpText:['project.next - посмотреть проекты/следующий проект','project.current - перейти к текущему проекту','project.<name> - перейти к проекту по имени','clear - очистить консоль', 'bgc:<color> - смени цвет фона', 'fc:<color> - смена цвета шрифта'],
+            helpText:['project.next - посмотреть проекты/следующий проект','project.current - перейти к текущему проекту','project.<name> - перейти к проекту по имени','clear - очистить консоль', 'bgc:<color> - смени цвет фона', 'fc:<color> - смена цвета шрифта', 'shift + ↑ - увеличить шрифт шрифта'],
             projectCounter: -1,
             inputValue:'',
             allInputs:[],
@@ -104,8 +101,8 @@ export default {
             this.counterInputHandler = 0
             // ПЕРЕЙТИ К ПРОЕКТУ
             if(value === 'project.current'){
-                document.getElementById('link').click()
-                console.log('curent');
+                let name = this.projectsTextes[this.projectCounter][0].split(':')[1].trim()
+                this.$router.push('/' + name)
             }
             // КОНСОЛЬНЫЕ КОМАНДЫ
             else if(value === 'help'){
@@ -238,6 +235,17 @@ export default {
     overflow-y: scroll;
     scrollbar-width: 2px;
 }
+.console-text-area::-webkit-scrollbar{
+    width: 10px;
+}
+.console-text-area::-webkit-scrollbar-track{
+    background: #000000;
+    padding: 3px;
+}
+.console-text-area::-webkit-scrollbar-thumb{
+    background-color: #aeaeae;
+    border: 3px solid #000000   ;
+}
 :root{
     --fonts-color: white;
     --back-color: none;
@@ -254,7 +262,7 @@ export default {
 .console-input { 
     height: 28px;
     background-color: white;
-    font-size: var(--font-size-console);
+    font-size: 20px;
     font-family: 'Book Antiqua';
     padding: 4px;
     color: black;

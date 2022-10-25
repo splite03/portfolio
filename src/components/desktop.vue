@@ -180,7 +180,7 @@ export default {
     --font-size-console: 20px;
 }
 .desktop { 
-    height: 800px;
+    height: 80vh;
     width: 100%;
     background-color: #00c0c0;
     position: relative;

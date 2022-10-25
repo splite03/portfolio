@@ -243,7 +243,6 @@ export default {
     mounted(){
         this.statusCounterHandler()
         this.firedStatusCheck()
-        document.querySelector('body').style.width = '100vw'
         setInterval(() => {
             this.firedStatusCheck()
         }, 1000)
@@ -254,6 +253,13 @@ export default {
     },
     updated(){
         this.firedStatusCheck()
+    },
+    unmounted(){
+        var id = window.setTimeout(function() {}, 0);
+
+        while (id--) {
+            window.clearTimeout(id);
+        }
     }
 }
 </script>
