@@ -19,7 +19,7 @@
                     $store.state.window = undefined"
                     @mousedown="$store.commit('preClick', '.close-folder')"></div>
             </div>
-    </div>
+        </div>
     </div>
 </template>
 <script>

@@ -31,9 +31,16 @@
                                 <span class="navbar-drop">
                                     <router-link to="/notes">Notes</router-link>
                                     <router-link to="/tasks">Tasks</router-link>
+                                    <a class="apple-watch" href="https://splite03.github.io/apple-watch/">Watch</a>
                                 </span>
                             </span>
                         </div>
+                    </span>
+                    <span class="navbar-link-with-underline">
+                        <span class="navbar-link">
+                            <a href="https://drive.google.com/file/d/1j02MXxHppUoIvvDSTMi5itc1x0ZVitgl/view" target="_blank">
+                                <span class="navbar-underline"></span>CV</a>
+                        </span>
                     </span>
                 </div>
             </div>

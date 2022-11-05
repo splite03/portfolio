@@ -57,6 +57,11 @@ export default {
             counterInputHandler:0,
         }
     },
+    computed:{
+        appleWatchLink(){
+            return document.querySelector('.apple-watch')
+        }
+    },
     methods:{
         // ШРИФТ САЙЗ ХЕНДЛЕР, ШИФТ + СТРЕЛКИ ВВЕРХ/ВНИЗ
 
